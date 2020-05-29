@@ -1,17 +1,18 @@
 import React from 'react';
-import Splash from '../../view_comps/Splash/Splash';
+import ModalComp from '../../view_comps/Modal/Modal';
 import Nav from '../../view_comps/Navigation/Nav';
 import { inject, observer } from 'mobx-react';
 import uuid from 'uuid';
 
-const Primary = observer((props) => {
+const Modal = observer((props) => {
     return (<>
                 <Nav />
+                
                 <div className="container">
-                    <Splash />
+                    <ModalComp />
                 </div>
             </>
             );    
 });
 
-export default Primary;
+export default Modal;
