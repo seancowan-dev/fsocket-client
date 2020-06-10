@@ -95,7 +95,7 @@ class Helpers {
         );
       }
     @action ipLookUp = () => {
-        $.ajax('http://ip-api.com/json')
+        $.ajax('http://damp-falls-21610.herokuapp.com/getIP')
         .then(res => {
             sessionStore.ipInfo = res;
         });
