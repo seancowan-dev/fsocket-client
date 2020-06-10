@@ -3,9 +3,25 @@
     .container {
       display: block;
       max-width: 100%!important;
-      height: 100vh;
-      min-height: 100vh;
+      height: 100%;
+      min-height: 100%;
       background-color: grey;
+    }
+
+    .row {
+      display: grid;
+    }
+
+    .head {
+      background-color: rgba(170, 189, 181, 0.86);
+    }
+
+    .active {
+      display: block;
+    }
+
+    .inactive {
+      display: none;
     }
 
     .text {
@@ -15,7 +31,11 @@
       line-height: 1.5;
     }
 
-    @media screen and (max-width: 767px) {
+    .admin-login-link {
+      margin-left: auto;
+    }
+
+    @media screen and (max-width: 768px) {
       .container {
         width: auto!important;
         margin-left: 1em!important;
@@ -23,7 +43,7 @@
       }
     }
 
-    @media screen and (min-width: 768px) and (max-width: 991px) {
+    @media screen and (min-width: 769px) and (max-width: 991px) {
       .container {
         width: 723px;
         margin-left: auto!important;
@@ -62,45 +82,300 @@
     .image {
       max-width: 100%;
       text-align: center;
+      margin-top: 30px;
       background-color:  rgb(240, 240, 240);
     }
 
     .fsocket-logo {
-      width: 100%;
-    }
-
-    .room-list-container {
-      background-color:  rgb(190, 190, 190);
-    }
-    
-    .room-list {
+      width: 50%;
       margin-left: auto;
       margin-right: auto;
     }
 
-    /* ///// Room ///// */
-    .room-container {
-      padding-top: 30px;
+    .room-list-container {
       width: 100%;
-      display: grid;
-      grid-template-columns: 70% 30%;
+      background-color:  rgb(190, 190, 190);
+    }
+    
+    .room-list {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
+    .room-details {
+      border: 1px solid black;
+      padding: 10px;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    .room-details:hover {
+      background-color: rgba(255, 247, 212, 0.86);
+    }
+
+    .room-details:active {
+      background-color: rgba(222, 255, 133, 0.86);
+    }
+
+    .room-description > div {
+      z-index: 90;
+    }
+
+    @media screen and (max-width: 360px) {
+      .room-details {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .room-pages {
+        display: flex;
+        flex-direction: column;
+      }
+      .room-list {
+        text-align: center;
+      }
+
+    }
+    /* ///// Room ///// */
+
     .chat-window {
+      display: flex;
+      flex-direction: column;
       background-color: rgb(170, 167, 167);
+      height: 100%;
+      min-height: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .messages {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      overflow-y: scroll;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+
+    .message-form {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    td.room-location {
+      text-align: center;
+    }
+
+    td.room-name {
+      text-align: center;
+    }
+
+    td.room-users-count {
+      text-align: center;
+    }
+
+    .message-send {
+      width: 80%;
+      height: 30px;
+    }
+
+    .room-footer {
+      width: 100%;
+      height: 20px;
+      background-color: black;
+      position: relative;
+      top: -20px;
+    }
+
+    @media screen and (min-width: 769px) {
+      .room-container {
+        padding-top: 30px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 70% 30%;
+        height: 100%;
+        min-height: 100%;
+        padding-bottom: 20px;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      .room-container {
+        padding-top: 30px;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 70% 30%;
+        height: 100%;
+        min-height: 100%;
+        padding-bottom: 20px;
+      }
+    }
+
+    /* ///// Admin ///// */
+    .admin-panel {
+      display: flex;
+      flex-direction: column;
+      background-color: rgb(196, 196, 196);
+      max-width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 30px;
+    }
+
+    .admin-container {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .admin-row {
+      grid-template-columns: 30% 30% 30%;
+      grid-gap: 2.5%;
     }
 
     /* ///// Modal ///// */
     .modal {
-      padding-top: 30px;
+      position: absolute;
+      z-index: 1000; /* Try to make sure its always on top */
       width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.86);
     }
     
     .modal-form {
-      width: 150px;
+      width: 50vw;
+      margin-top: 40vh;
       margin-left: auto;
       margin-right: auto;
       display: flex;
       flex-direction: column;
       background-color: grey;
+    }
+
+    /* ///// Footer ///// */
+
+    .em {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8pt;
+    }
+
+    .primary-footer-legal-container {
+
+    }
+
+    .footer-contact-info-container {
+      text-align: center;
+    }
+
+    .footer-copy-row {
+      padding: 10px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .footer-logo-row {
+      padding: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    .primary-footer {
+      background: linear-gradient(180deg, rgb(83, 160, 248) 0%, rgb(230, 200, 206) 100%);
+      -webkit-box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
+      -moz-box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
+      box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 350px;
+      width: 100%;
+      position: relative;
+      margin-top: 350px;
+      top: -350px;
+    }
+
+    @media screen and (min-width: 769px) { 
+
+    }
+
+    /* ///// Inputs ///// */
+    .modal-inputs {
+      height: 40px;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+      border-radius: 3px;
+    }
+
+    /* ///// Buttons ///// */
+
+    .create-new-room {
+      outline: none;
+      width: 100px;
+      height: 30px;
+
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+      background: rgba(41,184,229,1) 50%;
+
+      -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.86);
+      -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.86);
+      box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.86);
+
+      border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      border: 1px solid f1f1f1;
+    }
+
+    .create-new-room:hover {
+      background: rgb(186, 239, 255) 50%;
+    }
+
+    .create-new-room:active {
+      background: rgb(246, 255, 194) 50%;
+      border: 1px solid white;
+    }
+
+    .leave-room-button {
+      width: 100px;
+      height: 20px;
+    }
+
+    .leave-room-button:hover {
+
+    }
+
+    .leave-room-button:active {
+
+    }
+
+    .close-room-button {
+      width: 100px;
+      height: 20px;
+    }
+
+    .close-room-button:hover {
+
+    }
+
+    .close-room-button:active {
+
+    }
+
+    .send-message-button {
+      outline: none;
+      width: 20%;
+      height: 30px;
     }
