@@ -83,7 +83,6 @@ class Helpers {
     @action ipLookUp = () => {
         fetch('https://damp-falls-21610.herokuapp.com/getIP')
         .then(res => {
-            console.log(res);
             sessionStore.ipInfo = res;
         });
       }
