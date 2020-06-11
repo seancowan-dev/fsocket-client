@@ -14,7 +14,7 @@ class Helpers {
         // These are values required for the user's navigation of the site
 
         // Room List
-        @action pageButtonVisibility = (target) => { // Each time the component renders check if the previous or next buttons should be disabled or not
+        @action pageButtonVisibility = () => { // Each time the component renders check if the previous or next buttons should be disabled or not
             let prev, next;
 
             function hideBoth(arrLength) {
@@ -25,18 +25,20 @@ class Helpers {
                 }
             }
             // set button values
-            if (target.className === "room-list-controls-prev") {  // user clicked prev button
-                prev = target;
-                next = target.parentElement.lastChild;
-            }
-            if (target.className === "room-list-controls-next") { // user clicked next button
-                prev = target.parentElement.firstChild;
-                next = target;
-            }
-            if (target.id = "#document") { // page load
-                prev = target.document.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][0];
-                next = target.document.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][1];
-            }
+                prev = $('.room-list-controls-prev');
+                next = $('.room-list-controls-next');
+            // if (target.className === "room-list-controls-prev") {  // user clicked prev button
+            //     prev = target;
+            //     next = target.parentElement.lastChild;
+            // }
+            // if (target.className === "room-list-controls-next") { // user clicked next button
+            //     prev = target.parentElement.firstChild;
+            //     next = target;
+            // }
+            // if (target.id = "#document") { // page load
+            //     prev = target.document.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][0];
+            //     next = target.document.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][1];
+            // }
             if (roomStore.rooms.length === sessionStore.getRoomPage) { // If the current page is equal to the number of pages
                 // should disable the next button
                 next.disabled = true;

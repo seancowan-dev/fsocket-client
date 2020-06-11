@@ -6,8 +6,7 @@ const ControlButtons = inject("sessionStore", "roomStore", "helpers")(observer((
     useEffect(() => {
         window.addEventListener("load", (e) => {
             props.helpers.checkPageDisplay();
-            console.dir(e.target.childNodes[2]);
-            props.helpers.pageButtonVisibility(e.target);
+            props.helpers.pageButtonVisibility();
         });
     });
 
