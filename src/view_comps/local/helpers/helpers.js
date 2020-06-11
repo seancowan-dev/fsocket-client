@@ -7,6 +7,7 @@ import uuid from 'uuid';
 class LocalHelpers {
     createRoom() { // Creates a room JSON object to either store locally or in session data, psql db, etc.
         let host = SessionHelpers.getUserID();
+        console.log(host);
         return {
             id: uuid.v4(),
             roomHost: host.substring(1, host.length - 1),

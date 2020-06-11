@@ -41,6 +41,7 @@ const Modal = inject('sessionStore')(observer((props) => {
                 <button className="create-new-room modal-create" onClick={(e) => {
                     e.preventDefault();
                     let userRooms = SessionHelpers.getUserRooms();
+                    console.log(userRooms);
                     if (userRooms.length <= 4) {
                         LocalHelpers.listRoom(LocalHelpers.createRoom());
                     }

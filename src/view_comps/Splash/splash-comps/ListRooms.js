@@ -19,7 +19,7 @@ const RoomList = inject('sessionStore', 'roomStore', 'helpers')(observer((props)
                 navigate(`/site/room/${room.id}`);
             }}>
                         <p className="room-name" id={room.id}>{room.name}</p>
-                        <p className="room-location"><img src={process.env.PUBLIC_URL + 'assets/flags/32x32/' + props.sessionStore.getUserLocale + ".png"} /></p>
+                        <p className="room-location"><img src={process.env.VERCEL_URL + 'assets/flags/32x32/' + props.sessionStore.getUserLocale + ".png"} /></p>
                         <p className="room-users-count">0/8</p>
                         <ScrollText className="room-description" speed={50}>{room.desc}</ScrollText>
                     </div>

@@ -15,51 +15,35 @@ class Helpers {
 
         // Room List
         @action pageButtonVisibility = () => { // Each time the component renders check if the previous or next buttons should be disabled or not
-            let prev, next;
-
+   
             function hideBoth(arrLength) {
                 if (arrLength <= 1) {
                     // should make sure both buttons are inactive
-                    prev.disabled = true;
-                    next.disabled = true;
+                    $('.room-list-controls-prev').attr("disabled", true);
+                    $('.room-list-controls-next').attr("disabled", true);
                 }
             }
-            // set button values
-                prev = $('.room-list-controls-prev');
-                next = $('.room-list-controls-next');
-            // if (target.className === "room-list-controls-prev") {  // user clicked prev button
-            //     prev = target;
-            //     next = target.parentElement.lastChild;
-            // }
-            // if (target.className === "room-list-controls-next") { // user clicked next button
-            //     prev = target.parentElement.firstChild;
-            //     next = target;
-            // }
-            // if (target.id = "#document") { // page load
-            //     prev = target.document.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][0];
-            //     next = target.document.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][1];
-            // }
             if (roomStore.rooms.length === sessionStore.getRoomPage) { // If the current page is equal to the number of pages
                 // should disable the next button
-                next.disabled = true;
+                $('.room-list-controls-next').attr("disabled", true);
 
                 // and make sure that previous is active
-                prev.disabled = false;
+                $('.room-list-controls-prev').attr("disabled", false);
                 // unless there is only one page of entries
                 hideBoth(roomStore.getRoomArraysLength);
             }
             if (sessionStore.getRoomPage <= 1) { // If the room page is less than or equal to 1 that means we are on the first page
                 // should disable the previous button
-                prev.disabled = true;
+                $('.room-list-controls-prev').attr("disabled", true);
                 // and make sure that next is active
-                next.disabled = false;
+                $('.room-list-controls-next').attr("disabled", false);
                 // unless there is only one page of entries
                 hideBoth(roomStore.getRoomArraysLength);
             }
             if (sessionStore.getRoomPage > 1 && sessionStore.getRoomPage < roomStore.rooms.length) { // If the room page is greater than 1 and less than the max number of room pages
                 // should make sure both buttons are active
-                prev.disabled = false;
-                next.disabled = false;
+                $('.room-list-controls-prev').attr("disabled", false);
+                $('.room-list-controls-next').attr("disabled", false);
                 // unless there is only one page of entries
                 hideBoth(roomStore.getRoomArraysLength);
             }
@@ -97,8 +81,9 @@ class Helpers {
         );
       }
     @action ipLookUp = () => {
-        $.ajax('https://damp-falls-21610.herokuapp.com/getIP')
+        fetch('https://damp-falls-21610.herokuapp.com/getIP')
         .then(res => {
+            console.log(res);
             sessionStore.ipInfo = res;
         });
       }
