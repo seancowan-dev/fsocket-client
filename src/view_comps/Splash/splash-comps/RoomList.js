@@ -2,10 +2,11 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import ListRooms from './ListRooms';
 import ControlButtons from './ControlButtons';
+import LocalHelpers from '../../local/helpers/helpers';
 import MediaQuery from 'react-responsive';
 
 const RoomList = inject('helpers', 'sessionStore')(observer((props) => {
-    props.helpers.ipLookUp(); // get the user's location info for flag display
+    LocalHelpers.ipLookUp(); // get the user's location info for flag display
     // Mobile and tablet users have stacked tiles of divs
     // larger sizes have actual tables 
 

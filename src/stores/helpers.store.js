@@ -80,12 +80,6 @@ class Helpers {
           document.documentElement.clientWidth
         );
       }
-    @action ipLookUp = () => {
-        fetch('https://damp-falls-21610.herokuapp.com/getIP')
-        .then(res => {
-            sessionStore.ipInfo = res;
-        });
-      }
 }
 
 export default new Helpers();
