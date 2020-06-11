@@ -34,8 +34,8 @@ class Helpers {
                 next = target;
             }
             if (target.id = "#document") { // page load
-                prev = target.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][0];
-                next = target.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][1];
+                prev = target.document.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][0];
+                next = target.document.children[0].childNodes[2].children[1].children[5].children[0].children[2].children[1][1];
             }
             if (roomStore.rooms.length === sessionStore.getRoomPage) { // If the current page is equal to the number of pages
                 // should disable the next button
