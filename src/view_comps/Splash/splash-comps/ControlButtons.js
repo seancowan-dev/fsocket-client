@@ -3,11 +3,13 @@ import { inject, observer } from 'mobx-react';
 
 const ControlButtons = inject("sessionStore", "roomStore", "helpers")(observer((props) => {
 
-    window.addEventListener("load", (e) => {
-        props.helpers.checkPageDisplay();
-        props.helpers.pageButtonVisibility(e.target);
-    });
-    
+    if (window !== undefined) {
+        window.addEventListener("load", (e) => {
+            props.helpers.checkPageDisplay();
+            props.helpers.pageButtonVisibility(e.target);
+        });
+    }
+
     let startVal = () => { // Make sure that the previous button is not enabled if page = 1
         if (props.sessionStore.getRoomPage <= 1) {
             return true
