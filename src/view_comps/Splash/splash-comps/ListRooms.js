@@ -28,7 +28,7 @@ const RoomList = inject('sessionStore', 'roomStore', 'helpers')(observer((props)
                         <tr key={uuid.v4()} className="room-details" onClick={(e) => {
                             navigate(`/site/room/${room.id}`);
                         }}>
-                            <td className="room-location"><img src={process.env.PUBLIC_URL + 'assets/flags/32x32/' + props.sessionStore.getUserLocale + ".png"} /></td>
+                            <td className="room-location"><img src={process.env.VERCEL_URL + 'assets/flags/32x32/' + props.sessionStore.getUserLocale + ".png"} /></td>
                             <td className="room-name" id={room.id}>{room.name}</td>
                             <td className="room-users-count">0/8</td>
                             <td className="room-description">{room.desc}</td>

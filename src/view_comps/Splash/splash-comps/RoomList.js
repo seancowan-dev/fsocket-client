@@ -6,7 +6,10 @@ import LocalHelpers from '../../local/helpers/helpers';
 import MediaQuery from 'react-responsive';
 
 const RoomList = inject('helpers', 'sessionStore')(observer((props) => {
-    LocalHelpers.ipLookUp(); // get the user's location info for flag display
+    LocalHelpers.ipLookUp().then(res => {
+        props.sessionStore.setIpInfo(res);
+    }); // get the user's location info for flag display
+
     // Mobile and tablet users have stacked tiles of divs
     // larger sizes have actual tables 
 

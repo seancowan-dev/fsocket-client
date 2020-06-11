@@ -5,6 +5,14 @@ import SessionHelpers from './session';
 import uuid from 'uuid';
 
 class LocalHelpers {
+    handleErrors(response) { // prepares error message for HTTP request errors
+        if (response.ok === true) {
+            return response.json();
+        } 
+        else {
+            console.warn(`Code: ${response.status} Message: ${response.statusText}`);
+        }
+    }
     createRoom() { // Creates a room JSON object to either store locally or in session data, psql db, etc.
         let host = SessionHelpers.getUserID();
         console.log(host);
@@ -76,11 +84,20 @@ class LocalHelpers {
 
     }
     async ipLookUp() {
-        await fetch('https://damp-falls-21610.herokuapp.com/getIP')
-        .then(res => {
-            sessionStore.ipInfo = res;
-        });
-      }
+        return await fetch(`https://damp-falls-21610.herokuapp.com/getIP`, {
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'content-type': 'application/json'
+            }
+        })
+        .then(res => { 
+            return this.handleErrors(res);
+        })
+        .catch(err => {
+            console.warn(err);
+        })
+    }
 
 }
 

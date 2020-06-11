@@ -17,6 +17,10 @@ class SessionStore {
 
         @observable ipInfo = {};
 
+        @action setIpInfo = (info) => {
+            this.ipInfo = info;
+        }
+
         @computed get getUserLocale() {
             return this.ipInfo.countryCode;
         }
