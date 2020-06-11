@@ -75,8 +75,8 @@ class LocalHelpers {
     leaveRoom() { // Exits a user from a room
 
     }
-    async ipLookUp = () => {
-        return await fetch('https://damp-falls-21610.herokuapp.com/getIP')
+    async ipLookUp() {
+        await fetch('https://damp-falls-21610.herokuapp.com/getIP')
         .then(res => {
             sessionStore.ipInfo = res;
         });
