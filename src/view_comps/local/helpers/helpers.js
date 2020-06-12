@@ -84,7 +84,7 @@ class LocalHelpers {
 
     }
     async ipLookUp() {
-        return await fetch(`https://damp-falls-21610.herokuapp.com/getIP`, {
+        return await fetch(`https://damp-falls-21610.herokuapp.com/site/tools/getIP`, {
             method: 'GET',
             headers: {
                 'Access-Control-Allow-Origin': '*',
