@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
+import config from '../../../config';
 import ListRooms from './ListRooms';
 import ControlButtons from './ControlButtons';
-import LocalHelpers from '../../local/helpers/helpers';
 import MediaQuery from 'react-responsive';
+import socketIOClient from 'socket.io-client';
+const ENDPOINT = config.SOCKET_URL;
 
-const RoomList = inject('helpers', 'sessionStore')(observer((props) => {
-    LocalHelpers.ipLookUp().then(res => {
+const RoomList = inject('helpers', 'sessionStore', 'roomStore')(observer((props) => {
+
+    useEffect(() => {
+        const socket = socketIOClient(ENDPOINT);
+        socket.on("roomCreated", data => {
+            props.roomStore.listRoom(data);
+        });
+    }, []);
+
+    props.helpers.ipLookUp().then(res => {
         props.sessionStore.setIpInfo(res);
     }); // get the user's location info for flag display
 

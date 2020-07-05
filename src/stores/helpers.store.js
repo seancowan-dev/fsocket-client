@@ -1,7 +1,7 @@
 import React from 'react';
 import { observable, action, computed } from 'mobx';
-import sessionStore from './session.store';
-import roomStore from './room.store';
+import SessionStore from './session.store';
+import RoomStore from './room.store';
 import $ from 'jquery';
 import countryData from '../assets/world.json';
 
@@ -9,7 +9,6 @@ import countryData from '../assets/world.json';
 
 
 class Helpers {
-
     // Navigation
         // These are values required for the user's navigation of the site
 
@@ -23,54 +22,77 @@ class Helpers {
                     $('.room-list-controls-next').attr("disabled", true);
                 }
             }
-            if (roomStore.rooms.length === sessionStore.getRoomPage) { // If the current page is equal to the number of pages
+            if (RoomStore.rooms.length === SessionStore.getRoomPage) { // If the current page is equal to the number of pages
                 // should disable the next button
                 $('.room-list-controls-next').attr("disabled", true);
 
                 // and make sure that previous is active
                 $('.room-list-controls-prev').attr("disabled", false);
                 // unless there is only one page of entries
-                hideBoth(roomStore.getRoomArraysLength);
+                hideBoth(RoomStore.getRoomArraysLength);
             }
-            if (sessionStore.getRoomPage <= 1) { // If the room page is less than or equal to 1 that means we are on the first page
+            if (SessionStore.getRoomPage <= 1) { // If the room page is less than or equal to 1 that means we are on the first page
                 // should disable the previous button
                 $('.room-list-controls-prev').attr("disabled", true);
                 // and make sure that next is active
                 $('.room-list-controls-next').attr("disabled", false);
                 // unless there is only one page of entries
-                hideBoth(roomStore.getRoomArraysLength);
+                hideBoth(RoomStore.getRoomArraysLength);
             }
-            if (sessionStore.getRoomPage > 1 && sessionStore.getRoomPage < roomStore.rooms.length) { // If the room page is greater than 1 and less than the max number of room pages
+            if (SessionStore.getRoomPage > 1 && SessionStore.getRoomPage < RoomStore.rooms.length) { // If the room page is greater than 1 and less than the max number of room pages
                 // should make sure both buttons are active
                 $('.room-list-controls-prev').attr("disabled", false);
                 $('.room-list-controls-next').attr("disabled", false);
                 // unless there is only one page of entries
-                hideBoth(roomStore.getRoomArraysLength);
+                hideBoth(RoomStore.getRoomArraysLength);
             }
         }
-        
-        @action checkPageDisplay = () => {
-            let pages = document.querySelectorAll(".room-pages");
-
-            pages.forEach(page => {
-                let pageNum = page.classList[page.classList.length - 1];
-                let userPage = sessionStore.getRoomPage;
-
-                if (parseInt(pageNum) === userPage) {
-                    if (this.getWidth() > 769) {
-                        page.style.display = "table-row-group";
-                    }
-                    if (this.getWidth() <= 768) {
-                        page.style.display = "flex";
-                    }
-                } else {
-                    page.style.display = "none";
+        checkIDX(pageNumber) {
+            let userPage = SessionStore.getRoomPage;
+            if (pageNumber === userPage) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        @action checkPageDisplay = (input) => {
+            if (this.checkIDX(input) === true) {
+                if (this.getWidth() > 769) {
+                    return "table-page-display";
                 }
-            });
+                if (this.getWidth() <= 768) {
+                    return "flex-page-display";
+                }
+            } else {
+                return "none-page-display";
+            }
         }
 
     // Tool Functions
-
+    handleErrors(response) { // prepares error message for HTTP request errors
+        if (response.ok === true) {
+            return response.json();
+        } 
+        else {
+            console.warn(`Code: ${response.status} Message: ${response.statusText}`);
+        }
+    }
+    @action async ipLookUp() {
+        return await fetch(`http://localhost:8000/site/tools/getIP`, {
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'content-type': 'application/json'
+            }
+        })
+        .then(res => { 
+            return this.handleErrors(res);
+        })
+        .catch(err => {
+            console.warn(err);
+        })
+    }
     @action getWidth = () => {
         return Math.max(
           document.body.scrollWidth,

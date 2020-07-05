@@ -5,14 +5,13 @@ import roomStore from '../../../stores/room.store';
 import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-generator';
 
 class SessionHelpers {
-  
     registerUser() {
         const capitalizedName: string = uniqueNamesGenerator({
           dictionaries: [colors, adjectives, animals],
           style: 'capital'
-        }); // Red_Big_Donkey
+        }); // Ex: Red_Big_Donkey
         
-        window.localStorage.setItem('fsocket-userID', JSON.stringify(uuid.v4()));
+        window.localStorage.setItem('fsocket-userID', uuid.v4());
         window.localStorage.setItem('fsocket-userName', capitalizedName);
     }
     unregisterUser() {

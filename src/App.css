@@ -96,7 +96,6 @@
       width: 100%;
       background-color:  rgb(190, 190, 190);
     }
-    
     .room-list {
       width: 100%;
       margin-left: auto;
@@ -120,6 +119,18 @@
 
     .room-description > div {
       z-index: 90;
+    }
+
+    .none-page-display {
+      display: none;
+    }
+
+    .table-page-display {
+      display: table-row-group
+    }
+
+    .flex-page-display {
+      display: flex;
     }
 
     @media screen and (max-width: 360px) {
