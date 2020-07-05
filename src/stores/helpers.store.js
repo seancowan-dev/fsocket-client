@@ -3,6 +3,7 @@ import { observable, action, computed } from 'mobx';
 import SessionStore from './session.store';
 import RoomStore from './room.store';
 import $ from 'jquery';
+import config from '../config';
 import countryData from '../assets/world.json';
 
 // This file stores helper functions, and not data
@@ -79,7 +80,7 @@ class Helpers {
         }
     }
     @action async ipLookUp() {
-        return await fetch(`http://localhost:8000/site/tools/getIP`, {
+        return await fetch(`${config.SOCKET_URL}/site/tools/getIP`, {
             method: 'GET',
             headers: {
                 'Access-Control-Allow-Origin': '*',
