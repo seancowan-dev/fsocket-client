@@ -1,8 +1,8 @@
 const Serializer = {
-    serialRoomMember: (room_id, user_id) => {
+    serialRoomMember: (member) => {
         return {
-            room_id: room_id,
-            user_id: user_id
+            room_id: member.room_id,
+            user_id: member.user_id
         }
     },
     serialRoomOut: (name, owner, description, password) => { // Room ID and date created on server, not needed for output

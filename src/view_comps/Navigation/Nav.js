@@ -9,16 +9,44 @@ const Nav = observer((props) => {
         // some code here to do that later
         
         // Display the navigation
-    return (<><nav className="navigation" key={uuid.v4()}>
-        <A href="/site/admin/panel" className="admin-login-link">Admin Login</A>
-        </nav>
-        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu"></input>
-            <label for="openSidebarMenu" class="sidebarIconToggle">
-            <div class="spinner diagonal part-1"></div>
-            <div class="spinner horizontal"></div>
-            <div class="spinner diagonal part-2"></div>
-        </label>        
-    </>);
+    return (<React.Fragment>
+                <nav 
+                    key={uuid.v4()} 
+                    className="navigation"
+                >
+                    <A 
+                        href="/site/admin/panel" 
+                        className="admin-login-link"
+                    >
+                        Admin Login
+                    </A>
+                </nav>
+                <input 
+                    key={uuid.v4()} 
+                    type="checkbox" 
+                    className="openSidebarMenu" 
+                    id="openSidebarMenu"
+                />
+                    <label 
+                        key={uuid.v4()} 
+                        htmlFor="openSidebarMenu" 
+                        className="sidebarIconToggle"
+                    >
+                    <div 
+                        key={uuid.v4()} 
+                        className="spinner diagonal part-1"
+                    />
+                    <div 
+                        key={uuid.v4()} 
+                        className="spinner horizontal"
+                    />
+                    <div 
+                        key={uuid.v4()} 
+                        className="spinner diagonal part-2"
+                    />
+                </label>        
+            </React.Fragment>
+        );
 });
 
 export default Nav;

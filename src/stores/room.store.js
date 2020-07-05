@@ -24,24 +24,24 @@ class RoomStore {
             this.setRoomInCurrent(json);
         } 
     }
-    @action removeRoomFromList = (uuid) => {
-        let shouldDelete = false;
-        let pageIDX, roomIDX;
-        this.rooms.forEach((page, idx) => {
-            page.find((roomObject, ridx) => {
-                if (roomObject.id === uuid) {
-                    shouldDelete = true;
-                    pageIDX = idx;
-                    roomIDX = ridx;
-                }
-                return null;
-            })
-            return null;
-        })
-        if (shouldDelete === true) {
-            this.rooms[pageIDX].splice(roomIDX, 1);
-        }
-    }
+    // @action removeRoomFromList = (uuid) => {
+    //     let shouldDelete = false;
+    //     let pageIDX, roomIDX;
+    //     this.rooms.forEach((page, idx) => {
+    //         page.find((roomObject, ridx) => {
+    //             if (roomObject.id === uuid) {
+    //                 shouldDelete = true;
+    //                 pageIDX = idx;
+    //                 roomIDX = ridx;
+    //             }
+    //             return null;
+    //         })
+    //         return null;
+    //     })
+    //     if (shouldDelete === true) {
+    //         this.rooms[pageIDX].splice(roomIDX, 1);
+    //     }
+    // }
 
     @action listRoom = (roomJSON) => { // Enters the room into the front-end store to avoid repeated fetch calls
         const checkLastArrayElem  = (json) => {
@@ -76,11 +76,34 @@ class RoomStore {
 
         }
         checkLastArrayElem(roomJSON);
-        this.joinRoom(roomJSON.id);
     }
 
-    @action joinRoom = (room_id) => { // Joins a user to the room
-        SessionStore.setAddUserRoom(room_id);
+    @action addUserToRoom = (serial) => { // Joins a user to the room
+        let array = this.getRooms; // Get all the rooms
+        let loc = { // Placeholder for indices
+            page: null,
+            room: null
+        }
+        array.map((roomPage, roomPageIdx) => { // Map the array of room pages
+            return roomPage.map((room, roomIdx) => { // Map the array of rooms
+                if (room.id = serial.room_id) { // If the room id is equal to the id of the user request record the indices
+                    loc.page = roomPageIdx;
+                    loc.room = roomIdx;
+                }
+            })
+        });
+        if (this.rooms[loc.page][loc.room].members === undefined) {
+            this.rooms[loc.page][loc.room].members = [];
+        }
+        if (this.rooms[loc.page][loc.room].members !== undefined) {
+            let exists = this.rooms[loc.page][loc.room].members.find(member => {
+                return member.id = serial.user_id;
+            });
+            if (exists === undefined) {
+                this.rooms[loc.page][loc.room].members.push(serial);
+            }
+        }
+        
     }
 
     //Getters

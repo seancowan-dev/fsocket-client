@@ -30,35 +30,35 @@ class SessionStore {
             rooms: []
         }
 
-        @observable userRooms = [];
+        // @observable userRooms = [];
 
-            // Setters
-            @action setUserID = (uuid) => {
-                this.userInfo.uuid = uuid;
-            }
-            @action setAddUserRoom = (roomID) => {
-                this.userInfo.rooms.push(roomID);
-            }
-            @action setRemoveUserRoom = (roomID) => {
-                if (this.userInfo.rooms.includes(roomID) === true) {
-                    let idx = this.userInfo.rooms.indexOf(roomID);
-                    let newArr = this.userInfo.rooms.splice(idx - 1, 1);
-                    this.userInfo.rooms = newArr;
-                }
-            }
-            @action setUserRooms = (rooms) => {
-                this.userRooms = rooms;
-            }
-            // Getters
-            @computed get getUserID() {
-                return this.userInfo.uuid;
-            }
-            @computed get getUserRoomMembership() {
-                return this.userInfo.rooms;
-            }
-            @computed get getUserRooms() {
-                return this.userRooms;
-            }
+        //     // Setters
+        //     @action setUserID = (uuid) => {
+        //         this.userInfo.uuid = uuid;
+        //     }
+        //     @action setAddUserRoom = (roomID) => {
+        //         this.userInfo.rooms.push(roomID);
+        //     }
+        //     @action setRemoveUserRoom = (roomID) => {
+        //         if (this.userInfo.rooms.includes(roomID) === true) {
+        //             let idx = this.userInfo.rooms.indexOf(roomID);
+        //             let newArr = this.userInfo.rooms.splice(idx - 1, 1);
+        //             this.userInfo.rooms = newArr;
+        //         }
+        //     }
+        //     @action setUserRooms = (rooms) => {
+        //         this.userRooms = rooms;
+        //     }
+        // Getters
+        @computed get getUserID() {
+            return this.userInfo.uuid;
+        }
+        @computed get getUserRoomMembership() {
+            return this.userInfo.rooms;
+        }
+        @computed get getUserRooms() {
+            return this.userRooms;
+        }
 
         // Room List
         @observable roomPage = 1;

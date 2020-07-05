@@ -25,12 +25,6 @@ const Splash = inject('sessionStore', 'roomStore')(observer((props) => {
         });
     }, []);
     
-    useEffect(() => {
-        const socket = socketIOClient(ENDPOINT);
-        socket.on("userAddedToRoom", serialUser => { // Capture instruction from Socket.io
-            RoomService.insertUserInRoom(serialUser);
-        });
-    }, []);
     return (<div className="splash container">
             <div className="image">
                 <Logo />
