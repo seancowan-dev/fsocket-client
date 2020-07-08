@@ -1,8 +1,8 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import roomStore from '../../stores/room.store';
-import LocalHelpers from '../../view_comps/local/helpers/helpers';
-import SessionHelpers from '../../view_comps/local/helpers/session';
+import RoomService from '../../services/room.service'
+import Serializers from '../../serializers/serializers';
+import LocalSession from '../local/helpers/session';
 
 const Modal = inject('sessionStore')(observer((props) => {
     const displayStyle = {
@@ -40,15 +40,7 @@ const Modal = inject('sessionStore')(observer((props) => {
                 />
                 <button className="create-new-room modal-create" onClick={(e) => {
                     e.preventDefault();
-                    let userRooms = SessionHelpers.getUserRooms();
-                    console.log(userRooms);
-                    if (userRooms.length <= 4) {
-                        LocalHelpers.listRoom(LocalHelpers.createRoom());
-                    }
-                    if (userRooms.length > 4) {
-                        alert('This temporary alert is here because users may only host 5 rooms');
-                    }
-                    
+                    RoomService.createNewRoom(Serializers.roomOut(props.sessionStore.getNewRoomName, LocalSession.getUserName(), props.sessionStore.getNewRoomDescription, props.sessionStore.getNewRoomPassword));
                     props.sessionStore.setModalDisplay("none");
                 }}>Create Room</button>
             </form> 

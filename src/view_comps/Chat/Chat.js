@@ -1,25 +1,27 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import Message from './comps/Message';
+import RoomService from '../../services/room.service';
+import Serializers from '../../serializers/serializers';
+import LocalSession from '../local/helpers/session';
 
-const Chat = inject('sessionStore')(observer((props) => {
-    let room = props.sessionStore.getChatRoom(props.uuid);
-    let currentRoom, messageMap;
-    if (room === undefined) {
-        props.sessionStore.setRoom(props.uuid);
-    }
-    if (room !== undefined) {
-        currentRoom = props.sessionStore.getChatRoom(props.uuid);
-        messageMap = currentRoom.messages.map(messageObj => {
-            return <Message message={messageObj.message} name={messageObj.name}/>
+const Chat = inject('sessionStore', 'roomStore')(observer((props) => {
+    let messages = props.roomStore.getMessages;
+    let roomMessages = messages.find(messageObject => {
+        if (messageObject.room_id === props.uuid) {
+            return messageObject;
+        }
+    });
+    let roomObjects;
+    if (roomMessages !== undefined) {
+        roomObjects = roomMessages.messages.map(message => {
+        return <Message message={message.message} user_name={message.user_name} />
         });
     }
-
-
     return (
         <div className="chat-window">
             <ul className="messages">
-                {messageMap}
+                {roomObjects !== null ? roomObjects : ""}
             </ul>
                 <form className="message-form">
                 <input type="text" className="message-send" autoComplete="off" value={props.sessionStore.getUserSendMessage} onChange={(e) => {
@@ -28,9 +30,8 @@ const Chat = inject('sessionStore')(observer((props) => {
                     className="send-message-button"
                     onClick={(e) => {
                         e.preventDefault();
-                        // Call the function to send a message here for now just add to local store
-                        props.sessionStore.setRoomMessage(props.uuid, props.sessionStore.getUserSendMessage);
-                        props.sessionStore.setUserSendMessage(""); // Reset message blank for next message
+                        RoomService.sendMessage(Serializers.message(LocalSession.getUserName(), props.sessionStore.getUserSendMessage, props.uuid));
+                        props.sessionStore.setUserSendMessage("");
                     }}>Send</button>
             </form>
         </div>

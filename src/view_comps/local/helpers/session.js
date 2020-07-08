@@ -1,7 +1,5 @@
 import React from 'react'
 import uuid from 'uuid';
-import sessionStore from '../../../stores/session.store';
-import roomStore from '../../../stores/room.store';
 import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-generator';
 
 class SessionHelpers {
@@ -31,22 +29,6 @@ class SessionHelpers {
     }
     getUserName() {
         return window.localStorage.getItem('fsocket-userName');
-    }
-    getUserRooms() {
-        let userRooms = sessionStore.getUserRoomMembership.slice();
-        let allRooms = roomStore.getRooms.slice();
-        let userRoomObjects = [];
-
-        userRooms.forEach(room => {
-          allRooms.map(roomPage => {
-            Object.values(roomPage.slice()).find(roomInfo => {
-              if (roomInfo.id === room) {
-                userRoomObjects.push(roomInfo);
-              }
-            })
-          })
-        })
-        return userRoomObjects;
     }
 }
 
