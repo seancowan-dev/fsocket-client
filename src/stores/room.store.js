@@ -122,7 +122,9 @@ class RoomStore {
             })
             if (foundUser) {
                 this.rooms[roomIdx].memberCount--;
+                console.log(userIdx);
                 let newUserList = this.rooms[roomIdx].members.splice(userIdx, 1);
+                console.log(newUserList);
                 this.rooms[roomIdx].members = newUserList;
             }
         }
