@@ -8,7 +8,7 @@ class SessionHelpers {
         const capitalizedName: string = uniqueNamesGenerator({
           dictionaries: [colors, adjectives, animals],
           style: 'capital'
-        }); // Red_Big_Donkey
+        }); // ex: Red_Big_Donkey
         
         window.localStorage.setItem('fsocket-userID', JSON.stringify(uuid.v4()));
         window.localStorage.setItem('fsocket-userName', capitalizedName);
@@ -25,6 +25,7 @@ class SessionHelpers {
         }
     }
     getUserID() {
+        console.log(window.localStorage.getItem('fsocket-userID'));
         return window.localStorage.getItem('fsocket-userID');
     }
     getUserName() {

@@ -34,7 +34,7 @@ const RoomService = {
     },
     addUserToRoom(serial) {
         socket.emit('addUserToRoom', serial);
-        socket.emit("getRoomMessages", serial.room_id);
+        socket.emit('getRoomMessages', serial.room_id);
     },
     removeUserFromRoom(serial) {
         socket.emit('removeUserFromRoom', serial);
