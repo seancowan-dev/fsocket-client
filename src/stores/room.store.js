@@ -83,6 +83,7 @@ class RoomStore {
 
     @action userAddedToRoom = (member) => {
         let roomIdx;
+        let foundUser;
         let found = this.rooms.find((room, idx) => {
             if (room.id === member.room_id) {
                 // roomIdx = idx;
