@@ -1,5 +1,6 @@
 const Serializer = {
     member: (room_id, user_id) => {
+        console.log(user_id);
         return {
             room_id: room_id,
             user_id: user_id
