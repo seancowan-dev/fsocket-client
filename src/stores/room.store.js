@@ -85,13 +85,20 @@ class RoomStore {
         let roomIdx;
         let found = this.rooms.find((room, idx) => {
             if (room.id === member.room_id) {
-                roomIdx = idx;
+                // roomIdx = idx;
                 return room;
             }
         });
         if (found) {
-            this.rooms[roomIdx].memberCount++;
-            this.rooms[roomIdx].members.push(member);
+            foundUser = this.rooms[roomIdx].members.find((current, idx) => {
+                if (current.room_id === member.room_id) {
+                    return current;
+                }
+            })
+            if (!foundUser) {
+                this.rooms[roomIdx].memberCount++;
+                this.rooms[roomIdx].members.push(member);
+            }
         }
     }
 
@@ -101,7 +108,7 @@ class RoomStore {
         let foundUser;
         let found = this.rooms.find((room, idx) => {
             if (room.id === member.room_id) {
-                roomIdx = idx;
+                // roomIdx = idx;
                 return room;
             }
         });
