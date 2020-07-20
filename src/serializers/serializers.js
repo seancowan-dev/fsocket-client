@@ -1,6 +1,8 @@
 const Serializer = {
     member: (room_id, user_id) => {
-        console.log(user_id);
+        if (user_id.length > 36) {
+            user_id = user_id.slice(1, user_id.length - 1);
+        }
         return {
             room_id: room_id,
             user_id: user_id

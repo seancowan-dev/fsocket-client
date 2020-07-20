@@ -25,7 +25,6 @@ class SessionHelpers {
         }
     }
     getUserID() {
-        console.log(window.localStorage.getItem('fsocket-userID'));
         return window.localStorage.getItem('fsocket-userID');
     }
     getUserName() {
