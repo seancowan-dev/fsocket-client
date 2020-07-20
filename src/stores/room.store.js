@@ -86,7 +86,7 @@ class RoomStore {
         let foundUser;
         let found = this.rooms.find((room, idx) => {
             if (room.id === member.room_id) {
-                // roomIdx = idx;
+                roomIdx = idx;
                 return room;
             }
         });
@@ -109,7 +109,7 @@ class RoomStore {
         let foundUser;
         let found = this.rooms.find((room, idx) => {
             if (room.id === member.room_id) {
-                // roomIdx = idx;
+                roomIdx = idx;
                 return room;
             }
         });
