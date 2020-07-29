@@ -45,6 +45,7 @@ class LocalHelpers {
             time += '00';
         }
     
+        // why is vercel stuck i wonder?
         return time;
     }
     isVideoPlaying(listCode, playingCode) { // Compare the list code and the currently playing video code
