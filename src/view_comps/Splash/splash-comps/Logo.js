@@ -1,10 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import relax from './assets/relax.png';
+import fsocket from './assets/fsocketlogo.png';
 
 const Logo = observer((props) => {
     return (
-        <img alt="site logo" className="fsocket-logo" src={relax} />
+        <img alt="site logo" className="fsocket-logo" src={fsocket} />
     );
 });
 
