@@ -141,6 +141,63 @@
     }
     /* ///// Room ///// */
 
+    .room-container {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: 40% 20% 40%;
+    }
+
+    .room-footer {
+      width: 100%;
+      height: 20px;
+      background-color: black;
+      position: relative;
+      bottom: 0px;
+    }
+    .room-playlist {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: rgb(2,0,36);
+      background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(83,160,248,1) 0%, rgba(230,200,206,1) 100%);
+    }
+
+    .room-play-list-row {
+      display: grid;
+      grid-template-columns: 70% 15% 15%;
+    }
+
+    .playlist-grid-item {
+      text-align: center;
+      padding: 5px;
+      background: rgb(2,0,36);
+      background: linear-gradient(90deg, rgba(2,0,36,.20) 0%, rgba(230,200,206,0) 100%);
+    }
+
+    .playlist-grid-header-item {
+      text-align: center;
+      background-color: black;
+      color: #fcfcfc;
+    }
+
+    .youtube-video-player-container {
+      margin-top: 30px;
+    }
+    .youtube-video-player-container > div {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .youtube-video-player {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
     .chat-window {
       display: flex;
       flex-direction: column;
@@ -156,10 +213,16 @@
       height: 100%;
       background-color: white;
       overflow-y: scroll;
+      overflow-anchor: none;
       padding-left: 10px;
       padding-right: 10px;
       margin-bottom: 10px;
       margin-top: 10px;
+    }
+
+    #anchor {
+      overflow-anchor: auto;
+      height: 1px;
     }
 
     .message-form {
@@ -184,34 +247,37 @@
       height: 30px;
     }
 
-    .room-footer {
-      width: 100%;
-      height: 20px;
-      background-color: black;
-      position: relative;
-      top: -20px;
-    }
-
-    @media screen and (min-width: 769px) {
+    @media screen and (min-width: 500px) {
       .room-container {
-        padding-top: 30px;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 70% 30%;
-        height: 100%;
-        min-height: 100%;
-        padding-bottom: 20px;
+        grid-template-rows: 40% 30% 30%;
       }
     }
-    @media screen and (max-width: 768px) {
+    @media screen and (min-width: 769px) {
       .room-container {
+        grid-template-columns: 70% 30%;
+        grid-template-rows: 60% 40%;
+      }
+
+      .chat-window {
+        grid-column-start: 2;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 3;
         padding-top: 30px;
-        width: 100%;
-        display: grid;
-        grid-template-rows: 70% 30%;
-        height: 100%;
-        min-height: 100%;
-        padding-bottom: 20px;
+      }
+
+      .room-playlist {
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+
+      .youtube-video-player-container {
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 1;
+        grid-row-end: 1;
       }
     }
 
@@ -256,6 +322,69 @@
       display: flex;
       flex-direction: column;
       background-color: grey;
+    }
+
+    /* ///// New Host Modal ///// */
+    .new-host-modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.86);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+    }
+    .show-host-modal {
+      display: block;
+    }
+    .hide-host-modal {
+      display: none;
+    }
+
+    .selectNewHostFooter {
+      width: 100%;
+      height: 100px;
+      position: relative;
+      bottom: 100px;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .host-member-list-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .host-modal-member-list {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 320px;
+      height: 100%;
+      max-height: 70vh;
+      align-items: center;
+      background-color: rgba(41,184,229,1);
+    }
+
+    .host-modal-member-list-item {
+      background-color: white;
+      width: 200px;
+      text-align: center;
+      padding: 5px;
+      border: 2px solid black;
+      border-radius: 10px;
+      margin-bottom: 6px;
+    }
+
+    .host-modal-current-host {
+      border-color: red;
     }
 
     /* ///// Footer ///// */
@@ -317,7 +446,7 @@
 
     /* ///// Buttons ///// */
 
-    .create-new-room {
+    .standard-button {
       outline: none;
       width: 100px;
       height: 30px;

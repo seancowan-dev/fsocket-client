@@ -1,48 +1,36 @@
-import React from 'react';
 import config from '../config';
 import socketIOClient from 'socket.io-client';
-import RoomStore from '../stores/room.store';
-import serializers from '../serializers/serializers'
 const ENDPOINT = config.SOCKET_URL;
 const socket = socketIOClient(ENDPOINT);
-
-const ServiceHelpers = {
-    calculateMembers(grouped, currentRoom) {
-        let keys = Object.keys(grouped);
-        return keys.find(key => {
-            if (key === currentRoom.id) {
-                return key;
-            }
-            else {
-                return false;
-            }
-        })
-    }
-}
 
 const RoomService = {
 
     // Send Data to Socket
-    createNewRoom(serialized) { // Send room data to the websocket
+    createNewRoom(serialized) { // Tell the websocket that a new room was created
         socket.emit('createRoom', serialized);
     },
-    deleteRoom(id) {
+    updateRoomOwner(serialized) { // Tell the websocket that a room owner has changed
+        socket.emit('updateRoomOwner', serialized);
+    },
+    deleteRoom(id) { // Tell the web socket to delete a room
         socket.emit('deleteRoom', id);
     },
     getAllRooms() { // Get a list of all rooms
         socket.emit('getAllRooms');
     },
-    addUserToRoom(serial) {
-        socket.emit('addUserToRoom', serial);
-        socket.emit('getRoomMessages', serial.room_id);
+    addUserToRoom(serialized) { // When a new user joins a room tell the websocket to add that user, and to send the chat messages to their client
+        socket.emit('addUserToRoom', serialized);
+        socket.emit('getRoomMessages', serialized.room_id);
     },
-    removeUserFromRoom(serial) {
-        socket.emit('removeUserFromRoom', serial);
+    removeUserFromRoom(serialized) { // Tell the websocket to remove a user from the room
+        socket.emit('removeUserFromRoom', serialized);
     },
     sendMessage(serialized) { // Send a message to the websocket
         socket.emit('sendMessage', serialized);
+    },
+    sendPlaylistEntry(serialized) { // Tell the websocket that someone added a video URL to the playlist
+        socket.emit('addToPlaylist', serialized);
     }
-
 }
 
 export default RoomService;

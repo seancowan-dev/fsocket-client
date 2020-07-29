@@ -6,7 +6,6 @@ import SessionHelpers from '../../view_comps/local/helpers/session';
 import Slide from '../../view_comps/Splash/splash-comps/Slide';
 import ModalComp from '../../view_comps/Modal/Modal';
 import Footer from '../../view_comps/Footer/Footer';
-import uuid from 'uuid';
 
 const Primary = inject('sessionStore')(observer((props) => {
     // Do this when the user has come back to the main page, but not reloaded and needs a new ID/name

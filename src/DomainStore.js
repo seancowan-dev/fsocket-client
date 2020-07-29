@@ -1,7 +1,6 @@
-import {observable,action} from 'mobx';
-import uuid from "uuid";
 import RoomStore from './stores/room.store';
 import SessionStore from './stores/session.store';
+import UXCStore from './stores/uxc.store';
 import Helpers from './stores/helpers.store';
 
 class DomainStore{
@@ -10,6 +9,7 @@ class DomainStore{
 
     this.roomStore = RoomStore;
     this.sessionStore = SessionStore;
+    this.uxcStore = UXCStore;
     this.helpers = Helpers;
 
   }

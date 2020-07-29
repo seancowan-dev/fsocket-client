@@ -1,12 +1,10 @@
 import React from 'react';
 import Primary from '../views/Primary/Primary';
 import Room from '../views/Room/Room';
-import Admin from '../views/Admin/Panel';
 
-const routes = {
+const routes = { // Route the client to the appropriate pages for the specified paths
     "/": () => <Primary />,
-    "/site/room/:uuid": ({uuid}) => <Room uuid={uuid}/>,
-    "/site/admin/panel": () => <Admin />
+    "/site/room/:uuid": ({uuid}) => <Room uuid={uuid}/>
 };
 
 export default routes;

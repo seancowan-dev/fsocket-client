@@ -17,7 +17,7 @@ const Modal = inject('sessionStore')(observer((props) => {
                     placeholder="room title (required)" 
                     value={props.sessionStore.getNewRoomName} 
                     onChange={(e) => {
-                        props.sessionStore.setNewRoomName(e.target.value);
+                        props.sessionStore.setNewRoomName(e.target.value); // Set the room name
                     }}
                 />
                 <input 
@@ -26,21 +26,12 @@ const Modal = inject('sessionStore')(observer((props) => {
                     placeholder="description (required)" 
                     value={props.sessionStore.getNewRoomDescription}
                     onChange={(e) => {
-                        props.sessionStore.setNewRoomDescription(e.target.value);
-                    }}
-                />
-                <input 
-                    className="modal-inputs create-room-password" 
-                    type="text" 
-                    placeholder="password (optional)" 
-                    value={props.sessionStore.getNewRoomPassword}
-                    onChange={(e) => {
-                        props.sessionStore.setNewRoomPassword(e.target.value);
+                        props.sessionStore.setNewRoomDescription(e.target.value); // Set the room description
                     }}
                 />
                 <button className="create-new-room modal-create" onClick={(e) => {
                     e.preventDefault();
-                    RoomService.createNewRoom(Serializers.roomOut(props.sessionStore.getNewRoomName, LocalSession.getUserName(), props.sessionStore.getNewRoomDescription, props.sessionStore.getNewRoomPassword));
+                    RoomService.createNewRoom(Serializers.roomOut(props.sessionStore.getNewRoomName, LocalSession.getUserName(), props.sessionStore.getNewRoomDescription));
                     props.sessionStore.setModalDisplay("none");
                 }}>Create Room</button>
             </form> 

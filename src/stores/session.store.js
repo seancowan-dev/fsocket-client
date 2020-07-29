@@ -1,7 +1,4 @@
-import React from 'react';
 import { observable, action, computed } from 'mobx';
-import LocalSession from '../view_comps/local/helpers/session';
-import RoomStore from './room.store';
 
 // This file stores important information about the current user session
 
@@ -15,60 +12,54 @@ class SessionStore {
 
         // User
 
-        @observable ipInfo = {};
+        @observable userMessage = ""; // The message the user is currently typing
 
-        @observable userMessage = "";
+        @observable currentRoomPlaylist; // The playlist for the current room the user is in
 
-        @action setUserSendMessage(message) {
+        // Setters
+        @action setCurrentRoomPlaylist(list) { // Setter for playlist
+            this.currentRoomPlaylist = list;
+        }
+        @action setUserSendMessage(message) { // Setter for message
             this.userMessage = message;
         }
 
-        @computed get getUserSendMessage() {
+        // Getters
+        @computed get getCurrentRoomPlaylist() { // Getter for playlist
+            return this.currentRoomPlaylist;
+        }
+        @computed get getUserSendMessage() { // Getter for message
             return this.userMessage;
         }
 
-        @action setIpInfo = (info) => {
-            this.ipInfo = info;
-        }
-
-        @computed get getUserLocale() {
-            return this.ipInfo.countryCode;
-        }
         // Modal
 
-        @observable modal = {
+        @observable modal = { // Default modal input
             modalDisplay: "none",
             newRoomName: "",
-            newRoomDescription: "",
-            newRoomPassword: ""
+            newRoomDescription: ""
         }
 
             //Setters
-            @action setModalDisplay = (input) => {
+            @action setModalDisplay = (input) => { // Set the modal to be displayed, or not
                 this.modal.modalDisplay = input;
             }
-            @action setNewRoomName = (input) => {
+            @action setNewRoomName = (input) => { // Set the new room nae
                 this.modal.newRoomName = input;
             }
-            @action setNewRoomDescription = (input) => {
+            @action setNewRoomDescription = (input) => { // Set the new room description
                 this.modal.newRoomDescription = input;
             }
-            @action setNewRoomPassword = (input) => {
-                this.modal.newRoomPassword = input;
-            }
             //Getters
-            @computed get getModalDisplay() {
+            @computed get getModalDisplay() { // Get the current display state of the modal
                 return this.modal.modalDisplay;
             }
-            @computed get getNewRoomName() {
+            @computed get getNewRoomName() { // Get the currently entered value of the room name field
                 return this.modal.newRoomName;
             }
-            @computed get getNewRoomDescription() {
+            @computed get getNewRoomDescription() { // Get the currently entered value of the room description field
                 return this.modal.newRoomDescription;
-            } 
-            @computed get getNewRoomPassword() {
-                return this.modal.newRoomPassword;
-            }        
+            }   
 }
 
 export default new SessionStore();
