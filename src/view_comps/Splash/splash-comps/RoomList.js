@@ -16,17 +16,17 @@ const RoomList = inject('helpers', 'sessionStore')(observer((props) => {
                 </MediaQuery>
                 <MediaQuery minWidth={769}>
                 <div className="room-list-container">
-                    <table className="room-list">
-                        <caption className="room-list-title">Room List</caption>
-                        <thead className="room-list-head">
-                        <tr>
-                            <th>Name</th>
-                            <th># of Users</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
+                    <h3 className="room-list-title">Room List</h3>
+                    <div className="room-list">
+                        <div className="room-list-head">
+                        <div className="inner-room-list-head">
+                            <div>Name</div>
+                            <div># of Users</div>
+                            <div>Description</div>
+                        </div>
+                    </div>
                         <ListRooms />
-                    </table>
+                    </div>
                 </div>
                 </MediaQuery></>);
 }));

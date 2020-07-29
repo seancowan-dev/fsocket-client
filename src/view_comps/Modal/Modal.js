@@ -9,7 +9,11 @@ const Modal = inject('sessionStore')(observer((props) => {
         display: props.sessionStore.getModalDisplay
     }
     return (
-        <div style={displayStyle} className="modal">
+        <div style={displayStyle} className="modal" onClick={(e) => {
+            if (e.target.classList[0] === "modal") {
+                props.sessionStore.setModalDisplay("none");
+            }
+        }}>
             <form className="modal-form">
                 <input 
                     className="modal-inputs create-room-title" 
@@ -29,7 +33,7 @@ const Modal = inject('sessionStore')(observer((props) => {
                         props.sessionStore.setNewRoomDescription(e.target.value); // Set the room description
                     }}
                 />
-                <button className="create-new-room modal-create" onClick={(e) => {
+                <button className="create-new-room modal-create standard-button" onClick={(e) => {
                     e.preventDefault();
                     RoomService.createNewRoom(Serializers.roomOut(props.sessionStore.getNewRoomName, LocalSession.getUserName(), props.sessionStore.getNewRoomDescription));
                     props.sessionStore.setModalDisplay("none");

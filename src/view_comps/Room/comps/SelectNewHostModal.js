@@ -61,6 +61,8 @@ const NewHostModal = inject('uxcStore', 'roomStore')(observer((props) => {
                             let newRoomOwner = owner;
                             newRoomOwner.owner = member.name;
                             RoomService.updateRoomOwner(newRoomOwner); // Call the room service to emit to the socket
+                            // The user will probably want to close the modal if they have picked a new host, so do that automatically
+                            props.uxcStore.openHostModal(props.uxcStore.getSelectHostModalState); // Toggle the host modal closed
                         }}
                     >
                         {member.name}

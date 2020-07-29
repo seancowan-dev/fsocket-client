@@ -30,7 +30,7 @@ const Chat = inject('sessionStore', 'roomStore')(observer((props) => {
                 <input type="text" className="message-send" autoComplete="off" value={props.sessionStore.getUserSendMessage} onChange={(e) => {
                     props.sessionStore.setUserSendMessage(e.target.value);
                 }}/><button 
-                    className="send-message-button"
+                    className="send-message-button standard-button"
                     onClick={(e) => {
                         e.preventDefault();
                         let message = props.sessionStore.getUserSendMessage;

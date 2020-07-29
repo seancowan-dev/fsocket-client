@@ -40,6 +40,7 @@
         width: auto!important;
         margin-left: 1em!important;
         margin-right: 1em!important;
+        background-color: #2F66A8;
       }
     }
 
@@ -77,6 +78,7 @@
       max-width: 50%;
       margin-left: auto;
       margin-right: auto;
+      background-color:  #506175;
     }
 
     .image {
@@ -84,30 +86,60 @@
       text-align: center;
       margin-top: 30px;
       background-color:  rgb(240, 240, 240);
+      padding-top: 10px;
+      background: rgb(80,97,117);
+      background: linear-gradient(0deg, rgba(80,97,117,1) 0%, rgba(47,102,168,1) 100%);
     }
 
     .fsocket-logo {
-      width: 50%;
+      width: 100%;
+      max-width: 500px;
+      padding: 10px;
       margin-left: auto;
       margin-right: auto;
     }
 
     .room-list-container {
       width: 100%;
-      background-color:  rgb(190, 190, 190);
+      text-align: center;
     }
     
     .room-list {
       width: 100%;
       margin-left: auto;
       margin-right: auto;
+      text-align: center;
     }
 
+    .room-list > div {
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      background: rgba(41,184,229,1) 50%;
+      -webkit-box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
+      -moz-box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
+      box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      }
+
     .room-details {
-      border: 1px solid black;
-      padding: 10px;
-      margin-bottom: 15px;
+      height: 80px;
+      width: 80%;
       cursor: pointer;
+      background-color: #7AB6FF; 
+      -webkit-box-shadow: 1px -2px 8px 2px rgba(0,0,0,0.75);
+      -moz-box-shadow: 1px -2px 8px 2px rgba(0,0,0,0.75);
+      box-shadow: 1px -2px 8px 2px rgba(0,0,0,0.75);
+      border-radius: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
     .room-details:hover {
@@ -122,22 +154,74 @@
       z-index: 90;
     }
 
-    @media screen and (max-width: 360px) {
+    @media screen and (min-width: 769px) {
       .room-details {
-        margin-left: 10px;
-        margin-right: 10px;
-      }
-    }
+        width: 100%;
+        max-width: 100%;
+        height: min-content;
+        border-radius: 0;
+        box-shadow: none;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding: 0px;
 
-    @media screen and (max-width: 768px) {
-      .room-pages {
-        display: flex;
-        flex-direction: column;
+      }
+      .inner-room-details {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        margin-left: 5%;
+        margin-right: 5%;
       }
       .room-list {
-        text-align: center;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background: rgba(41,184,229,1) 50%;
+        -webkit-box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
+        box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
-
+      .room-list > div {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        background: rgba(41,184,229,1) 50%;
+        box-shadow: none;
+        border-radius: 0px;
+        display: block;
+        flex-direction: none;
+        }
+      .room-list-head {
+        width: 100%!important;
+        display: block!important;
+        max-width: 100%!important;
+        padding: 0!important;
+        margin: 0!important;
+        background-color: black!important;
+        border-radius: 0px!important;
+        box-shadow: none!important;
+        color: white; 
+      }
+      .inner-room-list-head {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        margin-left: 5%;
+        margin-right: 5%;
+      }
     }
     /* ///// Room ///// */
 
@@ -159,20 +243,31 @@
       display: flex;
       flex-direction: column;
       overflow-y: auto;
+      background: #11325C;
+      font-family: Bitwise;
+      font-size: 16px;
+    }
+
+    .room-play-list-row-head {
+      display: grid;
+      grid-template-columns: 70% 15% 15%;
       background: rgb(2,0,36);
-      background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(83,160,248,1) 0%, rgba(230,200,206,1) 100%);
+      background: linear-gradient(90deg, rgba(2,0,36,.20) 0%, rgba(230,200,206,0) 100%);
+      color: #fcfcfc;
     }
 
     .room-play-list-row {
       display: grid;
       grid-template-columns: 70% 15% 15%;
+      background: rgb(2,0,36);
+      background: linear-gradient(90deg, rgba(2,0,36,.20) 0%, rgba(230,200,206,0) 100%);
+      color: #fcfcfc;
+      cursor: pointer;
     }
 
     .playlist-grid-item {
       text-align: center;
       padding: 5px;
-      background: rgb(2,0,36);
-      background: linear-gradient(90deg, rgba(2,0,36,.20) 0%, rgba(230,200,206,0) 100%);
     }
 
     .playlist-grid-header-item {
@@ -201,7 +296,7 @@
     .chat-window {
       display: flex;
       flex-direction: column;
-      background-color: rgb(170, 167, 167);
+      background-color: #2F66A8;
       height: 100%;
       min-height: 100%;
       padding-left: 10px;
@@ -212,12 +307,19 @@
       width: 100%;
       height: 100%;
       background-color: white;
+      -webkit-box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,0.75);
+      -moz-box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,0.75);
+      box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,0.75);
       overflow-y: scroll;
       overflow-anchor: none;
       padding-left: 10px;
       padding-right: 10px;
       margin-bottom: 10px;
       margin-top: 10px;
+    }
+
+    .user-message {
+      word-wrap: break-word;
     }
 
     #anchor {
@@ -245,6 +347,11 @@
     .message-send {
       width: 80%;
       height: 30px;
+      padding-left: 5px;
+      padding-right: 5px;
+      -webkit-box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,0.75);
+      -moz-box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,0.75);
+      box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,0.75);
     }
 
     @media screen and (min-width: 500px) {
@@ -321,7 +428,8 @@
       margin-right: auto;
       display: flex;
       flex-direction: column;
-      background-color: grey;
+      background-color: #11325C;
+      border-radius: 10px;
     }
 
     /* ///// New Host Modal ///// */
@@ -420,14 +528,12 @@
       -webkit-box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
       -moz-box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
       box-shadow: 1px -2px 14px 2px rgba(0,0,0,0.75);
-      display: none;
+      display:  flex;
       flex-direction: column;
       justify-content: space-evenly;
       height: 350px;
       width: 100%;
       position: relative;
-      margin-top: 395px;
-      top: -350px;
     }
 
     @media screen and (min-width: 769px) { 
@@ -482,25 +588,24 @@
       height: 20px;
     }
 
-    .leave-room-button:hover {
-
-    }
-
-    .leave-room-button:active {
-
-    }
-
     .close-room-button {
       width: 100px;
       height: 20px;
     }
 
-    .close-room-button:hover {
-
+    .change-room-host-button {
+      width: 100px;
+      height: 20px;
     }
 
-    .close-room-button:active {
+    .room-nav-buttons {
+      cursor: pointer;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
 
+    .room-nav-buttons:hover {
+      background-color: rgb(230, 200, 206);
     }
 
     .send-message-button {

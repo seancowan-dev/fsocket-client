@@ -103,7 +103,7 @@ const Room = inject('sessionStore', 'roomStore', 'uxcStore')(observer((props) =>
     }
 
     let leaveRoom = <button  // Controls leaving the room
-                        className="leave-room-button"
+                        className="leave-room-button room-nav-buttons"
                         onClick={(e) => {
                             // Disconnects the user from the service and returns them to the main page under a new user ID
                             RoomService.removeUserFromRoom(Serializers.member(props.uuid, LocalSession.getUserID(), LocalSession.getUserName())); // Remove the user from the room store for this room
@@ -111,7 +111,7 @@ const Room = inject('sessionStore', 'roomStore', 'uxcStore')(observer((props) =>
                         }}
                     >Leave Room</button>
     let closeRoom = <button // Controls closing the room
-                        className="close-room-button"
+                        className="close-room-button room-nav-buttons"
                         onClick={(e) => {
                             // Closes this room and returns the host to the main page
                             // Other room users will see an error message and be directed to the main page as well
@@ -120,7 +120,7 @@ const Room = inject('sessionStore', 'roomStore', 'uxcStore')(observer((props) =>
                         }}
                     >Close Room</button>
     let updateRoom = <button // Opens a modal to let the host chose a new host
-                    className="close-room-button"
+                    className="change-room-host-button room-nav-buttons"
                     onClick={(e) => {
                             // Opens up the SelectNewHost Modal to chose a new host
                             props.uxcStore.openHostModal(props.uxcStore.getSelectHostModalState); // Display the modal to select a new host

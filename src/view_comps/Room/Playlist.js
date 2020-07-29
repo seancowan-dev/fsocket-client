@@ -94,7 +94,7 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
     }, [props.sessionStore, socket, props.roomStore, props.room_id]);
     return (
         <div className="room-playlist" key={uuid.v4()}>
-            <div className="room-play-list-row">
+            <div className="room-play-list-row-head">
                 <p className="playlist-grid-header-item">Title</p>
                 <p className="playlist-grid-header-item">Duration</p>
                 <p className="playlist-grid-header-item">Playing</p>

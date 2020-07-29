@@ -47,37 +47,42 @@ const RoomList = inject('sessionStore', 'roomStore', 'helpers')(observer((props)
                 <MediaQuery 
                     minWidth={769}
                 >
-                            <tr 
+                        <div 
+                            key={uuid.v4()} 
+                            className="room-details" 
+                            onClick={(e) => {
+                                navigate(`/site/room/${roomObject.id}`);
+                            }}
+                        >
+                            <div 
                                 key={uuid.v4()} 
-                                className="room-details" 
-                                onClick={(e) => {
-                                    navigate(`/site/room/${roomObject.id}`);
-                                }}
+                                className="inner-room-details"
                             >
-                            <td 
-                                className="room-name" 
-                                id={roomObject.id}
-                            >
-                                {roomObject.name}
-                            </td>
-                            <td 
-                                className="room-users-count"
-                            >
-                                {roomObject.members.length}/8
-                            </td>
-                            <td 
-                                className="room-description"
-                            >
-                                {roomObject.description}
-                            </td>
-                        </tr>
+                                <div 
+                                    className="room-name" 
+                                    id={roomObject.id}
+                                >
+                                    {roomObject.name}
+                                </div>
+                                <div 
+                                    className="room-users-count"
+                                >
+                                    {roomObject.members.length}/8
+                                </div>
+                                <div 
+                                    className="room-description"
+                                >
+                                    {roomObject.description}
+                                </div>
+                            </div>
+                        </div>
                 </MediaQuery>
             </React.Fragment>);
             });
             
         return <>
             <MediaQuery minWidth={769}>
-                <tbody key={uuid.v4()}>{rooms}</tbody>
+                <div key={uuid.v4()}>{rooms}</div>
             </MediaQuery>
             <MediaQuery maxWidth={768}>
                 <div key={uuid.v4()}>{rooms}</div>
