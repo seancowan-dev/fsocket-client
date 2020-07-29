@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import RoomService from '../../../services/room.service';
 import socketIOClient from 'socket.io-client';
 import config from '../../../config';
+import uuid from 'uuid';
 
 const ENDPOINT = config.SOCKET_URL;
 const NewHostModal = inject('uxcStore', 'roomStore')(observer((props) => {
@@ -56,7 +57,7 @@ const NewHostModal = inject('uxcStore', 'roomStore')(observer((props) => {
 
             return <div 
                         className={"host-modal-member-list-item " + ownerClass} 
-                        key={member.user_id} 
+                        key={uuid.v4()} 
                         onClick={(e) => {
                             let newRoomOwner = owner;
                             newRoomOwner.owner = member.name;
