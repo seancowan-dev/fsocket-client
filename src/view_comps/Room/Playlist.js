@@ -24,7 +24,9 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
 
     useEffect(() => { // When the a new item has been added to the playlist
         socket.on("playlistEntryAdded", entries => { // Capture instruction from Socket.io
+            console.log('playlist entry added');
             let listData = props.roomStore.updateRoomPlaylist(props.room_id, entries.items); // Add the new entry(s) into the room store, and return them to map for display
+            console.log(listData);
             let listObjects = listData.map(obj => { // Map the updated list entries
             return <div 
                     className="room-play-list-row" 
@@ -51,7 +53,7 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
             });           
             props.sessionStore.setCurrentRoomPlaylist(listObjects); // Playlist data is ready to display to the client
         });
-    });
+    }, [props.sessionStore, socket, props.roomStore, props.room_id]);
 
     useEffect(() => { // When the room first loads we should get the current playlist (this is essentially the same as above)
         socket.on("retrievedPlaylistEntries", newEntries => { // Capture instruction from Socket.io
