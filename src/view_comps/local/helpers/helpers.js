@@ -1,3 +1,5 @@
+import config from '../../../config';
+
 class LocalHelpers {
     handleErrors(response) { // prepares error message for HTTP request errors
         if (response.ok === true) {
@@ -7,9 +9,9 @@ class LocalHelpers {
             console.warn(`Code: ${response.status} Message: ${response.statusText}`);
         }
     }
-    // https://damp-falls-21610.herokuapp.com
+
     async ipLookUp() {
-        return await fetch(`http://localhost:8000/site/tools/getIP`, {
+        return await fetch(`${config.SOCKET_URL}/site/tools/getIP`, {
             method: 'GET',
             headers: {
                 'Access-Control-Allow-Origin': '*',

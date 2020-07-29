@@ -258,56 +258,6 @@ class RoomStore {
         }
         return new_playlist; // Return the new playlist to update on client
     }
-
-    // @action updateRoomPlaylistObjects = (room_id, listObjects) => { // These are completed objects to insert into the DOM
-    //     console.log('adding list objects to store');
-    //     console.log(listObjects);
-    //     let roomIdx = null;
-    //     let room = this.rooms.find((roomObj, idx) => { // Check to see if the room exists
-    //         if (roomObj.id === room_id) {
-    //             roomIdx = idx; // If it does store its index
-    //             return roomObj;
-    //         }
-    //     });
-
-    //     if (room) {
-    //         console.log('updating the playlist in the room: ' + room_id);
-    //         console.log('playlist before update: ' + this.rooms[roomIdx].playlistObjects);
-    //         this.rooms[roomIdx].playlistObjects = listObjects; // Overwrite the old playlist with the new one from the server
-    //     }
-    //     return listObjects; // Return the new playlist to update on client
-    // }
-
-    // @action getRoomPlaylist = (room_id) => {
-    //     let roomIdx = null;
-    //     let rooms = this.rooms.slice();
-    //     let room = rooms.find((roomObj, idx) => { // Check to see if the room exists
-    //         if (roomObj.id === room_id) {
-    //             roomIdx = idx;
-    //             return roomObj;
-    //         }
-    //     });
-
-        
-    //     if (room) {
-    //         return rooms[roomIdx]; // If it does then get it
-    //     }
-    // }
-
-    // @action getPlaylistObjects = (room_id) => {
-    //     console.log('told to get objects');
-    //     let roomIdx = null;
-    //     let room = this.rooms.find((roomObj, idx) => { // Check to see if the room exists
-    //         if (roomObj.id === room_id) {
-    //             roomIdx = idx;
-    //             return roomObj;
-    //         }
-    //     });
-
-    //     if (room) {
-    //         return this.rooms[roomIdx]; // If it does then return it
-    //     }
-    // }
 }
 
 export default new RoomStore();
