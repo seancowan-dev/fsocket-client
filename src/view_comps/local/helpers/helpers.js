@@ -9,22 +9,6 @@ class LocalHelpers {
             console.warn(`Code: ${response.status} Message: ${response.statusText}`);
         }
     }
-
-    async ipLookUp() {
-        return await fetch(`${config.SOCKET_URL}/site/tools/getIP`, {
-            method: 'GET',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'content-type': 'application/json'
-            }
-        })
-        .then(res => { 
-            return this.handleErrors(res);
-        })
-        .catch(err => {
-            console.warn(err);
-        })
-    }
     convertISOTime(timeCode) { // Converts ISO 8601 time codes to human friendly format
 
         function addZero(time) { // If the value of time is less than 10 then it needs a leading zero added
