@@ -21,10 +21,6 @@ const Room = inject('sessionStore', 'roomStore', 'uxcStore')(observer((props) =>
     let currentOwner = null;
     const socket = socketIOClient(ENDPOINT);
 
-    useEffect(() => { // Tell the client to emit the event to get rooms
-        socket.emit('getPlaylist', props.uuid);
-    });
-
     // If the user is joining this room without having hit the main page then the 
     // methods that are called to display the room list must also be called here
     if (SessionHelpers.checkUser() === false) { // Check if the user is registered already
@@ -33,6 +29,10 @@ const Room = inject('sessionStore', 'roomStore', 'uxcStore')(observer((props) =>
 
     // Now its safe to add the user to the room
     RoomService.addUserToRoom(Serializers.member(props.uuid, LocalSession.getUserID(), LocalSession.getUserName()));
+
+    useEffect(() => { // Tell the client to emit the event to get playlists
+        socket.emit('getPlaylist', props.uuid);
+    });
     
     // Now that the user has been added its time to get the room info for that user
     useEffect(() => { // Tell the client to emit the event to get rooms
