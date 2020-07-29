@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import LocalHelpers from '../local/helpers/helpers';
+import LocalSession from '../local/helpers/session';
 import socketIOClient from 'socket.io-client';
 import config from '../../config';
 import uuid from 'uuid';
@@ -10,6 +11,8 @@ const ENDPOINT = config.SOCKET_URL;
 
 const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
     const socket = socketIOClient(ENDPOINT); // Socket.io object
+
+    let roomOwner = props.roomStore.getRoomOwner(props.room_id);
     
     let currentPlaylist = props.sessionStore.getCurrentRoomPlaylist; // Get the computed playlists from the MobX store
     let playlistObjects; // Placeholder variable to hold the playlist objects if they exist
@@ -35,7 +38,9 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
                             room_id: props.room_id,
                             video_path: obj.id
                         }
-                        socket.emit('loadVideo', listEntry); // Emit to the socket so all room members videos play at the same time
+                        if (LocalSession.getUserName() === roomOwner) { // Only let the room host play videos
+                            socket.emit('loadVideo', listEntry); // Emit to the socket so all room members videos play at the same time
+                        }
                     }}>
                         <ScrollText // Scroll the title incase it is long - snippet.localized.title will automatically pull the localized title
                             className="playlist-grid-item" 
@@ -67,7 +72,9 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
                                     room_id: props.room_id,
                                     video_path: obj.id
                             }
-                        socket.emit('loadVideo', listEntry); // Emit to the socket so all room members videos play at the same time
+                            if (LocalSession.getUserName() === roomOwner) { // Only let the room host play videos
+                                socket.emit('loadVideo', listEntry); // Emit to the socket so all room members videos play at the same time
+                            }
                         }}>
                         <ScrollText // Scroll the title incase it is long - snippet.localized.title will automatically pull the localized title
                             className="playlist-grid-item" 
