@@ -25,30 +25,33 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
     useEffect(() => { // When the a new item has been added to the playlist
         socket.on("playlistEntryAdded", entries => { // Capture instruction from Socket.io
             let listData = props.roomStore.updateRoomPlaylist(props.room_id, entries.items); // Add the new entry(s) into the room store, and return them to map for display
-            let listObjects = listData.map(obj => { // Map the updated list entries
-            return <div 
-                    className="room-play-list-row" 
-                    key={uuid.v4()} 
-                    id={obj.id} // This is the id of the YT vid
-                    onClick={(event) => {
-                        let listEntry = { // Make a basic list entry
-                            room_id: props.room_id,
-                            video_path: obj.id
-                        }
-                        socket.emit('loadVideo', listEntry); // Emit to the socket so all room members videos play at the same time
-                    }}>
-                        <ScrollText // Scroll the title incase it is long - snippet.localized.title will automatically pull the localized title
-                            className="playlist-grid-item" 
-                            speed={50}>{obj.snippet.localized.title}
-                        </ScrollText>
-                        <p className="playlist-grid-item">
-                            {LocalHelpers.convertISOTime(obj.contentDetails.duration)}
-                        </p>
-                        <p className="playlist-grid-item">
-                            {LocalHelpers.isVideoPlaying(obj.id, checkPlaying())}
-                        </p>
-                    </div>
-            });           
+            if (listData) { // Wait for list data to exist
+                let listObjects = listData.map(obj => { // Map the updated list entries
+                    return <div 
+                            className="room-play-list-row" 
+                            key={uuid.v4()} 
+                            id={obj.id} // This is the id of the YT vid
+                            onClick={(event) => {
+                                let listEntry = { // Make a basic list entry
+                                    room_id: props.room_id,
+                                    video_path: obj.id
+                                }
+                                socket.emit('loadVideo', listEntry); // Emit to the socket so all room members videos play at the same time
+                            }}>
+                                <ScrollText // Scroll the title incase it is long - snippet.localized.title will automatically pull the localized title
+                                    className="playlist-grid-item" 
+                                    speed={50}>{obj.snippet.localized.title}
+                                </ScrollText>
+                                <p className="playlist-grid-item">
+                                    {LocalHelpers.convertISOTime(obj.contentDetails.duration)}
+                                </p>
+                                <p className="playlist-grid-item">
+                                    {LocalHelpers.isVideoPlaying(obj.id, checkPlaying())}
+                                </p>
+                            </div>
+                    });  
+            }
+         
             props.sessionStore.setCurrentRoomPlaylist(listObjects); // Playlist data is ready to display to the client
         });
     }, [props.sessionStore, socket, props.roomStore, props.room_id]);

@@ -48,9 +48,12 @@ const NewHostModal = inject('uxcStore', 'roomStore')(observer((props) => {
     if (roomMembers) { // If there are members map them
         listItems = roomMembers.map(member => {
             let ownerClass = "";
-            if (owner.owner === member.name) { // If the owner of the room is the same as this member
-                ownerClass = "host-modal-current-host"; // Assign a class to highlight current room owner
+            if (member) { // wait for data to actually exist
+                if (owner.owner === member.name) { // If the owner of the room is the same as this member
+                    ownerClass = "host-modal-current-host"; // Assign a class to highlight current room owner
+                }
             }
+
             return <div 
                         className={"host-modal-member-list-item " + ownerClass} 
                         key={member.user_id} 
