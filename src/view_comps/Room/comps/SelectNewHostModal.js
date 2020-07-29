@@ -17,9 +17,6 @@ const NewHostModal = inject('uxcStore', 'roomStore')(observer((props) => {
         modalDisplay = "show-host-modal";
     }
 
-    let listItems;
-    let roomMembers = props.roomStore.getRoomMembers(props.room_id); // Get the room members from the store
-
     // Set this once when the modal opens
     let owner = props.roomStore.getRoomOwner(props.room_id);
 
@@ -45,8 +42,10 @@ const NewHostModal = inject('uxcStore', 'roomStore')(observer((props) => {
         })
     }, [props.roomStore])
 
+    let listItems;
+    let roomMembers = props.roomStore.getRoomMembers(props.room_id); // Get the room members from the store
 
-    if (roomMembers) { // If there are members map them
+    if (roomMembers !== false) { // If there are members map them
         listItems = roomMembers.map(member => {
             let ownerClass = "";
             if (member) { // wait for data to actually exist
@@ -57,7 +56,7 @@ const NewHostModal = inject('uxcStore', 'roomStore')(observer((props) => {
 
             return <div 
                         className={"host-modal-member-list-item " + ownerClass} 
-                        key={uuid.v4()} 
+                        key={member.user_id} 
                         onClick={(e) => {
                             let newRoomOwner = owner;
                             newRoomOwner.owner = member.name;

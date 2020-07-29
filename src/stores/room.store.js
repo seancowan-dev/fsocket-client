@@ -205,7 +205,7 @@ class RoomStore {
             }
             return null
         });
-        if (foundMembers) { // If we found something return the members
+        if (foundMembers !== null) { // If we found something return the members
             return foundMembers.members.slice();
         }
         else { // Otherwise return false so the client knows there are no members in the room
