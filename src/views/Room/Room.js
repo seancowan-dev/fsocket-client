@@ -52,7 +52,7 @@ const Room = inject('sessionStore', 'roomStore', 'uxcStore')(observer((props) =>
     // If the host changes hosts the room should know this happened
     useEffect(() => {
         socket.on("roomOwnerUpdated", data => { // Capture event from Socket.io
-            props.roomStore.changeRoomOwner(props.uuid, data); // Change the room owner to the new owner coming from the socket
+            props.roomStore.changeRoomOwner(props.uuid, data.owner); // Change the room owner to the new owner coming from the socket
         })
     }, [socket, props.roomStore, props.uuid]);
 

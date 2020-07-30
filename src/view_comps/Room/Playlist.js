@@ -13,7 +13,7 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
     const socket = socketIOClient(ENDPOINT); // Socket.io object
 
     let roomOwner = props.roomStore.getRoomOwner(props.room_id);
-    
+ 
     let currentPlaylist = props.sessionStore.getCurrentRoomPlaylist; // Get the computed playlists from the MobX store
     let playlistObjects; // Placeholder variable to hold the playlist objects if they exist
     if (currentPlaylist !== undefined) { // If there are playlist objects, set them to be displayed
@@ -38,7 +38,7 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
                             room_id: props.room_id,
                             video_path: obj.id
                         }
-                        if (LocalSession.getUserName() === roomOwner) { // Only let the room host play videos
+                        if (LocalSession.getUserName() === roomOwner.owner) { // Only let the room host play videos
                             socket.emit('loadVideo', listEntry); // Emit to the socket so all room members videos play at the same time
                         }
                     }}>
@@ -72,7 +72,7 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
                                     room_id: props.room_id,
                                     video_path: obj.id
                             }
-                            if (LocalSession.getUserName() === roomOwner) { // Only let the room host play videos
+                            if (LocalSession.getUserName() === roomOwner.owner) { // Only let the room host play videos
                                 socket.emit('loadVideo', listEntry); // Emit to the socket so all room members videos play at the same time
                             }
                         }}>

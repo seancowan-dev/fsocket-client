@@ -43,7 +43,7 @@ const Splash = inject('sessionStore', 'roomStore')(observer((props) => {
     useEffect(() => {  
         const socket = socketIOClient(ENDPOINT);
         socket.on("roomOwnerUpdated", data => { // Capture event from Socket.io
-            props.roomStore.changeRoomOwner(props.uuid, data); // Change the room owner in the room store
+            props.roomStore.changeRoomOwner(props.uuid, data.owner); // Change the room owner in the room store
         })
     }, [props.roomStore, props.uuid]);
 
