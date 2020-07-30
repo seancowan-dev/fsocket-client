@@ -1,68 +1,43 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# fSocket (React) [Client]
+Access the site here: https://fsocket-client-git-project-complete.seancowan-dev.now.sh/
 
-## Available Scripts
+This is the Client to see the source for the API go here: https://github.com/seancowan-dev/fsocket-api
 
-In the project directory, you can run:
+![Image of Client](https://i.imgur.com/FagKdqN.png)
 
-### `npm start`
+This application allows users to host chat rooms and to share the URL of the room with their friends.  Once they are in the room they can paste Youtube URLs directly into the chat.  This will add the videos to a playlist which the room host can control.  When the room host plays a video, the video plays for all people in the room.  Its a quick and easy way to watch a video with a friend!
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Why This App Was Made
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This app was made because due to the reduced amount of socialization we are all experiencing during the pandemic, I have found myself looking for ways to watch videos with my friends over the internet.  There are many offerings available on tap online, but this is my implementation.  I primarily watch Youtube with my friends and I found that many of the existing video-sharing applications were too verbose, there's too many features.  This application was developed so that anyone who is looking for a barebones, quick, and simple way to watch a Youtube video with a few friends can have that option available to them.
 
-### `npm test`
+## API
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://damp-falls-21610.herokuapp.com/
 
-### `npm run build`
+This application uses a websocket based API implemented with [Socket.io](https://socket.io/) and as such as a non-traditional data flow.  There are no http endpoints in this application.  Socket.io operates on 'events' - named queries sent to the socket can respond with other named queries. This allows for highly specialized real-time content updates. This events operate using an 'emit' and 'on' syntax.  Events are emitted, and on reception of those events, other actions can be taken.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Summary of Socket.io Endpoints
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Socket.io endpoints must live in the application root in order to operate correctly.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The Client Callback Event is the event which is sent by the client (if any) when the server responds to the initial action.  If this column is shown as 'none' then there is no callback, and the client simply displays the received data.
 
-### `npm run eject`
+| Client Emitted Event | Actions Taken | Server Response Event | Actions Taken | Client Callback Event |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| connection | Client emits a request to the server to connect | connected | Sever emits a response to the client confirming connection | getAllRooms |
+| getAllRooms | Client emits a request to the server to get all the currently open rooms | receiveAllRooms | Server emits an event telling the client to receive the rooms and the corresponding room data | none |
+| createRoom | Client emits a request to the server to create a room with the given name and description | roomCreated | Server emits a response to the server containing the room that was just inserted into the database | none |
+| deleteRoom | Client emits a request to the server with the UUID of the room that should be deleted | roomDeleted | Server emits a response and the UUID of the room, if the UUID matches input ID, deletion was successful | none |
+| updateRoomOwner | Client emits a request to the server with the updated room object indicating the  new owner | roomOwnerUpdated | Server emits a response to the client to update the specific rooms and affected user(s) | none |
+| addUserToRoom | Client emits a request to the server with the user object indicating the new user to add | userAddedToRoom | Server emits a response to the client with the completed user object from the database | none |
+| removeUserFromRoom | Client emits a request to the server with the user object containing UUIDs for the user and room | removedUserFromRoom | Server emits a response to the client with either the UUID of the removed user to confirm deletion, or false if the user was already deleted | none |
+| sendMessage | Client emits a request to the server with the message object indicating the room, user, and message sent | messageSent | Server emits a response to the client telling all members of the room that a new message was sent | getRoomMessages |
+| getRoomMessages | Clients of all room members in the specified room in the original 'sendMessage' emit a request to the server to get the updated messages for the room | receiveMessages | Server emits a response indicating that messages have been found, and the corresponding room messages to all clients of the apprporiate room | none |
+| addToPlaylist | Client emits a request to the server with the youtube URL that was entered into the chat window | playistEntryAdded | Server emits a response to all clients connected to the same room with the new playlist entry, or if that room was deleted while the request was running for some reason, it returns false | none |
+| getPlaylist | Client emits a request to the server with the UUID of the room for which a playlist is desired | retrievedPlaylistEntries | Server emits all the playlist entries to all clients connected to the specified room | none |
+| loadVideo | Client of the host emits a request to the server to play the specified Youtube video from the playlist for a particular room | videoLoaded | Server emits a response to all clients connected to that room instructing the Youtube player to play the video | none |
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Technology Used
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The application is built on HTML, CSS, JavaScript, React + MobX, Socket.io and Node with Express and PGSQL
