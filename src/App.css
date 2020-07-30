@@ -99,6 +99,16 @@
       margin-right: auto;
     }
 
+    .about {
+      padding-left: 5%;
+      padding-right: 5%;
+      font-family: Arial;
+    }
+
+    .about > ul {
+      list-style-type:none;
+    }
+
     .room-list-container {
       width: 100%;
       text-align: center;

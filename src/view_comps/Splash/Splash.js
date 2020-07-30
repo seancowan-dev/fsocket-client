@@ -65,6 +65,23 @@ const Splash = inject('sessionStore', 'roomStore')(observer((props) => {
             <div className="image">
                 <Logo />
             </div>
+            <section className="about">
+                <h1>Welcome to fSocket!</h1>
+                <br />
+                <p>You're only a few clicks away from being able to watch real-time YouTube videos with your friends or colleagues.  No accounts just straight to the point video playback.</p>
+                <br />
+                <br />
+                <h3>How to use fSocket</h3>
+                <br />
+                <ul>
+                    <li><p>1. Click the Create Room button just below these instructions.  Enter a name and a description in the pop-up and click Create Room.</p></li>
+                    <li><p>2. Your newly created room will appear in the list, click on the room to join it.</p></li>
+                    <li><p>3. Copy and paste the room URL exactly as it appears and share it with others.</p></li>
+                    <li><p>4. Once in the room anyone can paste a YouTube URL directly into the chat, this will add the video to the playlist.</p></li>
+                    <li><p>5. You (the room host) will be able to pick any video from the playlist.  When you do it will play for everyone in the room at the same time.</p></li>
+                    <li><p>6. Click the Change Host button in the lower left-hand corner of the room and you can pass off control to another person if you desire.</p></li>
+                </ul>
+            </section>
             <button className="create-new-room standard-button" onClick={(e) => {
                     e.preventDefault();
                     props.sessionStore.setModalDisplay("block"); // Set modal display to block so it appears
