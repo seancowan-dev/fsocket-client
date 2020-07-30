@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './Site';
+import Site from './Site';
 import io from "socket.io-client";
 import config from './config';
 const ENDPOINT = config.SOCKET_URL;
@@ -21,11 +21,11 @@ describe('| Site Test Object |', () => {
   });
 
   it('should render correctly in "debug" mode', () => {
-    const component = shallow(<App debug />);
+    const component = shallow(<Site debug />);
     expect(component).toMatchSnapshot();
   });
   it('should render correctly in "production" mode', () => {
-    const component = shallow(<App production />);
+    const component = shallow(<Site production />);
     expect(component).toMatchSnapshot();
   });
 });

@@ -1,8 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './Site';
+import { Provider } from "mobx-react";
+import DomainStore from '../../DomainStore';
+import Modal from './Modal';
 import io from "socket.io-client";
-import config from './config';
+import config from '../../config';
 const ENDPOINT = config.SOCKET_URL;
 
 jest.mock("socket.io-client", () => {
@@ -11,6 +13,13 @@ jest.mock("socket.io-client", () => {
   const socket = { emit, on };
   return jest.fn(() => socket);
 });
+
+const store = { // Setup the store objects to pass to the rest of the app
+    roomStore: DomainStore.roomStore,
+    sessionStore: DomainStore.sessionStore,
+    uxcStore: DomainStore.uxcStore,
+    helpers: DomainStore.helpers
+  }
 
 describe('| Site Test Object |', () => {
   
@@ -21,11 +30,11 @@ describe('| Site Test Object |', () => {
   });
 
   it('should render correctly in "debug" mode', () => {
-    const component = shallow(<App debug />);
+    const component = shallow(<Provider {...store}><Modal debug /></Provider>);
     expect(component).toMatchSnapshot();
   });
   it('should render correctly in "production" mode', () => {
-    const component = shallow(<App production />);
+    const component = shallow(<Provider {...store}><Modal production /></Provider>);
     expect(component).toMatchSnapshot();
   });
 });
