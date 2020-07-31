@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import RoomService from '../../services/room.service'
 import Serializers from '../../serializers/serializers';
 import LocalSession from '../local/helpers/session';
 
 const Modal = inject('sessionStore')(observer((props) => {
-    const displayStyle = {
+    const displayStyle = { // Get the state of the modal display
         display: props.sessionStore.getModalDisplay
     }
+    const displayMessage = { // Get the state of the modal message display
+        display: props.sessionStore.getModalMessageDisplay
+    }
+
+    let [modalMessages, setModalMessages] = useState();
     return (
         <div style={displayStyle} className="modal" onClick={(e) => {
             if (e.target.classList[0] === "modal") {
                 props.sessionStore.setModalDisplay("none");
+                window.scrollTo(props.sessionStore.getLastUserScroll[0], props.sessionStore.getLastUserScroll[1]);
             }
         }}>
             <form className="modal-form">
+                <div style={displayMessage}className="modal-form-message">
+                    {modalMessages}
+                </div>
                 <input 
                     className="modal-inputs create-room-title" 
                     type="text" 
@@ -35,8 +44,41 @@ const Modal = inject('sessionStore')(observer((props) => {
                 />
                 <button className="create-new-room modal-create standard-button" onClick={(e) => {
                     e.preventDefault();
-                    RoomService.createNewRoom(Serializers.roomOut(props.sessionStore.getNewRoomName, LocalSession.getUserName(), props.sessionStore.getNewRoomDescription));
-                    props.sessionStore.setModalDisplay("none");
+                    let data = { // Get the user input from the session store
+                        name: props.sessionStore.getNewRoomName,
+                        description: props.sessionStore.getNewRoomDescription
+                    }
+                    let flags = 0; // Set flags to 0
+                    let errors = []; // Prepare error array
+                    if (data.name.length <= 0) { // If there is no data for the room name
+                        flags++; // Add a flag
+                        errors.push("You need to enter a room name"); // Add an appropriate message
+                    }
+                    if (data.name.length > 16) { // Keep room names short and simple
+                        flags++; // Add a flag
+                        errors.push("Room name cannot be more than 16 characters long"); // Add an appropriate message
+                    }
+                    if (data.description.length <= 0) { // If there is no data for the room description
+                        flags++; // Add a flag
+                        errors.push("You need to enter a room description"); // Add an appropriate message
+                    }
+                    if (data.description.length > 128) { // Description too long
+                        flags++; // Add a flag
+                        errors.push("Room description may only be 128 characters long"); // Add an appropriate message
+                    }
+                    if (flags > 0) { // If flags were seen
+                        props.sessionStore.setModalMessageDisplay("block"); // Show the error modal
+                        setModalMessages(errors.map(error => {
+                            return <p>{error}</p>
+                        }))
+                        setTimeout(() => { // After some time, hide the error message
+                            props.sessionStore.setModalMessageDisplay("none");
+                        }, 5000)
+                    } else {
+                        RoomService.createNewRoom(Serializers.roomOut(data.name, LocalSession.getUserName(), data.description));
+                        props.sessionStore.setModalDisplay("none");
+                    }
+
                 }}>Create Room</button>
             </form> 
         </div>

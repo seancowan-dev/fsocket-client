@@ -36,13 +36,22 @@ class SessionStore {
 
         @observable modal = { // Default modal input
             modalDisplay: "none",
+            lastUserScroll: [0, 0], // Stores where the user last scrolled for when they close the modal
             newRoomName: "",
-            newRoomDescription: ""
+            newRoomDescription: "",
+            modalMessageDisplay: "none",
+            modalMessages: []
         }
 
             //Setters
             @action setModalDisplay = (input) => { // Set the modal to be displayed, or not
                 this.modal.modalDisplay = input;
+            }
+            @action setModalMessageDisplay = (input) => {
+                this.modal.modalMessageDisplay = input;
+            }
+            @action setModalMessages = (input) => {
+                this.modal.modalMessages = input;
             }
             @action setNewRoomName = (input) => { // Set the new room nae
                 this.modal.newRoomName = input;
@@ -50,15 +59,28 @@ class SessionStore {
             @action setNewRoomDescription = (input) => { // Set the new room description
                 this.modal.newRoomDescription = input;
             }
+            @action setLastUserScroll = (x, y) => {
+                this.modal.lastUserScroll[0] = x;
+                this.modal.lastUserScroll[1] = y;
+            }
             //Getters
             @computed get getModalDisplay() { // Get the current display state of the modal
                 return this.modal.modalDisplay;
+            }
+            @computed get getModalMessageDisplay() {
+                return this.modal.modalMessageDisplay;
+            }
+            @computed get getModalMessages() {
+                return this.modal.modalMessages.slice();
             }
             @computed get getNewRoomName() { // Get the currently entered value of the room name field
                 return this.modal.newRoomName;
             }
             @computed get getNewRoomDescription() { // Get the currently entered value of the room description field
                 return this.modal.newRoomDescription;
+            }
+            @computed get getLastUserScroll() {
+                return this.modal.lastUserScroll;
             }   
 }
 

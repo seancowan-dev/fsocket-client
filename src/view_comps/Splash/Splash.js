@@ -84,6 +84,8 @@ const Splash = inject('sessionStore', 'roomStore')(observer((props) => {
             </section>
             <button className="create-new-room standard-button" onClick={(e) => {
                     e.preventDefault();
+                    props.sessionStore.setLastUserScroll(window.pageXOffset, window.pageYOffset);
+                    window.scrollTo(0,0);
                     props.sessionStore.setModalDisplay("block"); // Set modal display to block so it appears
             }}>Create Room</button>
             <RoomList />

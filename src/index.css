@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'Bitwise';
-  src: url('/fonts/Bitwise.ttf') format('embedded-opentype'), /* Internet Explorer */
-  url('/fonts/Bitwise.ttf') format('woff2'), /* Super Modern Browsers */
-  url('/fonts/Bitwise.ttf') format('woff'), /* Pretty Modern Browsers */
-  url('/fonts/Bitwise.ttf')  format('truetype'), /* Safari, Android, iOS */
-  url('/fonts/Bitwise.ttf') format('svg'); /* Legacy iOS */
+  src: url('../src/fonts/Bitwise.ttf') format('embedded-opentype'), /* Internet Explorer */
+  url('../src/fonts/Bitwise.ttf') format('woff2'), /* Super Modern Browsers */
+  url('../src/fonts/Bitwise.ttf') format('woff'), /* Pretty Modern Browsers */
+  url('../src/fonts/Bitwise.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('../src/fonts/Bitwise.ttf') format('svg'); /* Legacy iOS */
 }
 
 * {

@@ -250,7 +250,7 @@ class RoomStore {
                 roomIdx = idx; // If it does store its index
                 return roomObj;
             }
-
+            return null;
         });
 
         if (room) {

@@ -1,5 +1,3 @@
-import config from '../../../config';
-
 class LocalHelpers {
     handleErrors(response) { // prepares error message for HTTP request errors
         if (response.ok === true) {

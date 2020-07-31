@@ -12,7 +12,7 @@ const Primary = inject('sessionStore')(observer((props) => {
     if (SessionHelpers.checkUser() === false) { // Check if the user is registered already
         SessionHelpers.registerUser(); // If not register the user
     }
-    return (<>
+    return (<div className="main-container">
                 <Nav />
                 <Slide />
                 <ModalComp />
@@ -20,7 +20,7 @@ const Primary = inject('sessionStore')(observer((props) => {
                     <Splash />
                 </div>
                 <Footer />
-            </>
+            </div>
             );    
 }));
 

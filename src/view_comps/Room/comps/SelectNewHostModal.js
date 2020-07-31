@@ -3,7 +3,6 @@ import { inject, observer } from 'mobx-react';
 import RoomService from '../../../services/room.service';
 import socketIOClient from 'socket.io-client';
 import config from '../../../config';
-import uuid from 'uuid';
 
 const ENDPOINT = config.SOCKET_URL;
 const NewHostModal = inject('uxcStore', 'roomStore')(observer((props) => {

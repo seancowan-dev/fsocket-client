@@ -43,20 +43,21 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
                         }
                     }}>
                         <ScrollText // Scroll the title incase it is long - snippet.localized.title will automatically pull the localized title
+                            key={uuid.v4()}
                             className="playlist-grid-item" 
                             speed={50}>{obj.snippet.localized.title}
                         </ScrollText>
-                        <p className="playlist-grid-item">
+                        <p key={uuid.v4()} className="playlist-grid-item">
                             {LocalHelpers.convertISOTime(obj.contentDetails.duration)}
                         </p>
-                        <p className="playlist-grid-item">
+                        <p key={uuid.v4()} className="playlist-grid-item">
                             {LocalHelpers.isVideoPlaying(obj.id, checkPlaying())}
                         </p>
                     </div>
             });           
             props.sessionStore.setCurrentRoomPlaylist(listObjects); // Playlist data is ready to display to the client
         });
-    }, [props.sessionStore, socket, props.roomStore, props.room_id]);
+    }, [props.sessionStore, socket, props.roomStore, props.room_id, roomOwner.owner]);
 
     useEffect(() => { // When the room first loads we should get the current playlist (this is essentially the same as above)
         socket.on("retrievedPlaylistEntries", newEntries => { // Capture instruction from Socket.io
@@ -77,13 +78,14 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
                             }
                         }}>
                         <ScrollText // Scroll the title incase it is long - snippet.localized.title will automatically pull the localized title
+                            key={uuid.v4()}
                             className="playlist-grid-item" 
                             speed={50}>{obj.snippet.localized.title}
                         </ScrollText>
-                        <p className="playlist-grid-item">
+                        <p key={uuid.v4()} className="playlist-grid-item">
                             {LocalHelpers.convertISOTime(obj.contentDetails.duration)}
                         </p>
-                        <p className="playlist-grid-item">
+                        <p key={uuid.v4()} className="playlist-grid-item">
                             {LocalHelpers.isVideoPlaying(obj.id, checkPlaying())}
                         </p>
                         </div>
@@ -91,13 +93,13 @@ const Playlist = inject('roomStore', 'sessionStore')(observer((props) => {
                 props.sessionStore.setCurrentRoomPlaylist(listObjects); // Playlist data is ready to display to the client
             }
         });
-    }, [props.sessionStore, socket, props.roomStore, props.room_id]);
+    }, [props.sessionStore, socket, props.roomStore, props.room_id, roomOwner.owner]);
     return (
         <div className="room-playlist" key={uuid.v4()}>
-            <div className="room-play-list-row-head">
-                <p className="playlist-grid-header-item">Title</p>
-                <p className="playlist-grid-header-item">Duration</p>
-                <p className="playlist-grid-header-item">Playing</p>
+            <div key={uuid.v4()} className="room-play-list-row-head">
+                <p key={uuid.v4()} className="playlist-grid-header-item">Title</p>
+                <p key={uuid.v4()} className="playlist-grid-header-item">Duration</p>
+                <p key={uuid.v4()} className="playlist-grid-header-item">Playing</p>
             </div>
             {playlistObjects}
         </div>
