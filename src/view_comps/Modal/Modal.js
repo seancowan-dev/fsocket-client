@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import RoomService from '../../services/room.service'
 import Serializers from '../../serializers/serializers';
 import LocalSession from '../local/helpers/session';
+import uuid from 'uuid';
 
 const Modal = inject('sessionStore')(observer((props) => {
     const displayStyle = { // Get the state of the modal display
@@ -50,17 +51,21 @@ const Modal = inject('sessionStore')(observer((props) => {
                     }
                     let flags = 0; // Set flags to 0
                     let errors = []; // Prepare error array
-                    if (data.name.length <= 0) { // If there is no data for the room name
+                    let regEx = /^(?=.*[a-zA-Z0-9 ]).{5,}/;
+                    let matchName = data.name.match(regEx);
+                    let matchDescription = data.description.match(regEx);
+
+                    if (data.name.length <= 0 || matchName === null) { // If there is no data for the room name
                         flags++; // Add a flag
-                        errors.push("You need to enter a room name"); // Add an appropriate message
+                        errors.push("You need to enter a room name that contains characters and is at least 5 characters long."); // Add an appropriate message
                     }
                     if (data.name.length > 16) { // Keep room names short and simple
                         flags++; // Add a flag
                         errors.push("Room name cannot be more than 16 characters long"); // Add an appropriate message
                     }
-                    if (data.description.length <= 0) { // If there is no data for the room description
+                    if (data.description.length <= 0 || matchDescription === null) { // If there is no data for the room description
                         flags++; // Add a flag
-                        errors.push("You need to enter a room description"); // Add an appropriate message
+                        errors.push("You need to enter a room description that contains characters and is at least 5 characters long."); // Add an appropriate message
                     }
                     if (data.description.length > 128) { // Description too long
                         flags++; // Add a flag
@@ -69,7 +74,7 @@ const Modal = inject('sessionStore')(observer((props) => {
                     if (flags > 0) { // If flags were seen
                         props.sessionStore.setModalMessageDisplay("block"); // Show the error modal
                         setModalMessages(errors.map(error => {
-                            return <p>{error}</p>
+                            return <p key={uuid.v4()}>{error}</p>
                         }))
                         setTimeout(() => { // After some time, hide the error message
                             props.sessionStore.setModalMessageDisplay("none");
